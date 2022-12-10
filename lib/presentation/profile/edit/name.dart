@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+import 'package:smartbuy/core/colors/colors.dart';
+import 'package:smartbuy/core/constants.dart';
+import 'package:smartbuy/presentation/profile/screen_profile.dart';
+import 'package:smartbuy/presentation/widgets/customtextformfield.dart';
+
+class FullName extends StatelessWidget {
+  const FullName({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(height * 0.15),
+        child: AppBar(
+          iconTheme: const IconThemeData(color: Colors.black),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: boldTextStyle(15, kDarkColor, 'Edit Name'),
+        ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: width * 0.08, vertical: 50),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                boldTextStyle(14, kDarkColor, 'Full Name')!,
+                SizedBox(height: height * 0.01),
+                const CustomTextFormField(
+                    icon: Icons.person_outline,
+                    label: 'Muhammed Arshad K A',
+                    keyboardType: TextInputType.name),
+              ],
+            ),
+            kheight50,
+            SizedBox(
+              height: height * 0.07,
+              width: width * 0.9,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const ScreenProfile(),
+                  ));
+                },
+                child: boldTextStyle(13, kWhiteColor, 'Save'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
