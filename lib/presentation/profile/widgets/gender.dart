@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
 import 'package:smartbuy/presentation/profile/screen_profile.dart';
-import 'package:smartbuy/presentation/widgets/customtextformfield.dart';
 
 class Gender extends StatelessWidget {
   const Gender({super.key});
@@ -20,7 +17,7 @@ class Gender extends StatelessWidget {
           iconTheme: const IconThemeData(color: Colors.black),
           backgroundColor: Colors.transparent,
           elevation: 0,
-          title: boldTextStyle(15, kDarkColor, 'Edit Name'),
+          title: boldTextStyle(15, kDarkColor, 'Edit Profile'),
         ),
       ),
       body: Padding(
@@ -30,15 +27,20 @@ class Gender extends StatelessWidget {
             boldTextStyle(14, kDarkColor, 'Gender')!,
             SizedBox(height: height * 0.01),
             Container(
-              decoration: BoxDecoration(border: Border.all(width: 2)),
+              decoration: BoxDecoration(
+                border: Border.all(width: 1),
+              ),
               child: DropdownButton<String>(
+                isExpanded: true,
+                value: 'Male',
+                underline: Container(),
+                onChanged: (_) {},
                 items: <String>['Male', 'Female', 'Others'].map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
                   );
                 }).toList(),
-                onChanged: (_) {},
               ),
             ),
             kheight50,

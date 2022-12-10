@@ -11,6 +11,9 @@ import 'package:smartbuy/presentation/widgets/customtextformfield.dart';
 class ScreenLogin extends StatelessWidget {
   const ScreenLogin({super.key});
 
+  // final emailController = TextEditingController();
+  // final passwordController = TextEditingController();
+  // final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -39,12 +42,36 @@ class ScreenLogin extends StatelessWidget {
                 icon: Icons.email_outlined,
                 label: 'Enter Email ID',
                 keyboardType: TextInputType.emailAddress,
+                // controller: emailController,
+                // validator: (value) {
+                //   if (value == null || value.isEmpty) {
+                //     return "Please Enter an email";
+                //   }
+                //   if (!RegExp(
+                //           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                //       .hasMatch(value)) {
+                //     return "Please enter a valid email";
+                //   }
+                //   return null;
+                // },
               ),
               SizedBox(height: height * 0.020),
               const CustomTextFormField(
                 icon: Icons.lock_outline,
                 label: 'Password',
                 keyboardType: TextInputType.visiblePassword,
+                // controller: passwordController,
+                // validator: (value) {
+                //   if (value == null || value.isEmpty) {
+                //     return "Please Enter the Password";
+                //   }
+                //   if (!RegExp(
+                //           r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+                //       .hasMatch(value)) {
+                //     return "Please enter valid Password";
+                //   }
+                //   return null;
+                // },
               ),
               SizedBox(height: height * 0.03),
               SizedBox(
