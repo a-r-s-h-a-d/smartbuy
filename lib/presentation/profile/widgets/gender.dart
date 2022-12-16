@@ -27,10 +27,13 @@ class Gender extends StatelessWidget {
             boldTextStyle(14, kDarkColor, 'Gender')!,
             SizedBox(height: height * 0.01),
             Container(
+              height: 60,
               decoration: BoxDecoration(
                 border: Border.all(width: 1),
+                borderRadius: kBradius10,
               ),
               child: DropdownButton<String>(
+                alignment: AlignmentDirectional.center,
                 isExpanded: true,
                 value: 'Male',
                 underline: Container(),
@@ -44,19 +47,22 @@ class Gender extends StatelessWidget {
               ),
             ),
             kheight50,
-            SizedBox(
-              height: height * 0.07,
-              width: width * 0.9,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const ScreenProfile(),
-                  ));
-                },
-                child: boldTextStyle(13, kWhiteColor, 'Save'),
-              ),
-            ),
           ],
+        ),
+      ),
+      bottomSheet: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: SizedBox(
+          height: height * 0.07,
+          width: width * 0.9,
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => const ScreenProfile(),
+              ));
+            },
+            child: boldTextStyle(13, kWhiteColor, 'Save'),
+          ),
         ),
       ),
     );

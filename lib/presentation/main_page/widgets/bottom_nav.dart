@@ -26,8 +26,8 @@ class BottomNavigationWidgets extends StatelessWidget {
             BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Explore'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.shopping_cart), label: 'Cart'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.local_offer_outlined), label: 'Offer'),
+            // BottomNavigationBarItem(
+            //     icon: Icon(Icons.local_offer_outlined), label: 'Offer'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person_outline_rounded), label: 'Account'),
           ],

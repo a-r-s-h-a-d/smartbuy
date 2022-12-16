@@ -4,7 +4,10 @@ import 'package:smartbuy/core/colors/colors.dart';
 
 BorderRadius kBradius10 = BorderRadius.circular(10);
 SizedBox kheight10 = const SizedBox(height: 10);
+SizedBox kheight20 = const SizedBox(height: 20);
+SizedBox kheight30 = const SizedBox(height: 30);
 SizedBox kheight50 = const SizedBox(height: 50);
+SizedBox kwidth20 = const SizedBox(width: 20);
 
 TextStyle klogoStyle1 = const TextStyle(
   fontFamily: 'Poppins',
@@ -29,6 +32,7 @@ TextStyle kheading1 = const TextStyle(
 Widget? regularTextStyle(double size, Color color, String text) {
   return Text(
     text,
+    // maxLines: 8,
     style: TextStyle(
       fontFamily: 'Poppins',
       fontSize: size,
@@ -41,6 +45,7 @@ Widget? regularTextStyle(double size, Color color, String text) {
 Widget? boldTextStyle(double size, Color color, String text) {
   return Text(
     text,
+    // maxLines: 2,
     style: TextStyle(
       fontFamily: 'Poppins bold',
       fontSize: size,

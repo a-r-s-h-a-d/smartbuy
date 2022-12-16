@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
 import 'package:smartbuy/presentation/account/widgets/account_tile.dart';
+import 'package:smartbuy/presentation/cart/screen_cart.dart';
 import 'package:smartbuy/presentation/profile/widgets/custom_editprofile.dart';
 import 'package:smartbuy/presentation/profile/widgets/gender.dart';
 
@@ -26,12 +27,23 @@ class ScreenProfile extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Center(
-                child: ClipRRect(
-                    child: Image.asset(
-                  'assets/images/temp_profile.jpg',
-                  height: height * 0.15,
-                )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: ClipRRect(
+                        child: Image.asset(
+                      'assets/images/temp_profile.jpg',
+                      height: height * 0.15,
+                    )),
+                  ),
+                  Column(
+                    children: const [
+                      Button(icon: Icons.add_a_photo_outlined),
+                      Button(icon: Icons.delete),
+                    ],
+                  )
+                ],
               ),
               kheight50,
               const AccountTile(

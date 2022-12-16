@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
 import 'package:smartbuy/presentation/account/widgets/account_tile.dart';
+import 'package:smartbuy/presentation/address/screen_address.dart';
+import 'package:smartbuy/presentation/order/screen_order.dart';
+import 'package:smartbuy/presentation/payment/screen_payment.dart';
 import 'package:smartbuy/presentation/profile/screen_profile.dart';
 
 class ScreenAccount extends StatelessWidget {
@@ -28,17 +31,17 @@ class ScreenAccount extends StatelessWidget {
             AccountTile(
               icon: Icons.shopping_bag_outlined,
               title: 'Order',
-              route: ScreenProfile(),
+              route: ScreenOrder(),
             ),
             AccountTile(
               icon: Icons.location_on_outlined,
               title: 'Address',
-              route: ScreenProfile(),
+              route: ScreenAddress(screenname: 'Address'),
             ),
             AccountTile(
               icon: Icons.payment,
               title: 'Payment',
-              route: ScreenProfile(),
+              route: ScreenPayment(),
             ),
           ],
         ));

@@ -29,6 +29,7 @@ class CustomEditScreen extends StatelessWidget {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(height * 0.15),
         child: AppBar(
@@ -39,9 +40,12 @@ class CustomEditScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: width * 0.08, vertical: 50),
+        padding: EdgeInsets.symmetric(
+          horizontal: width * 0.08,
+          vertical: 50,
+        ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,13 +64,14 @@ class CustomEditScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(height: height * 0.05),
                     boldTextStyle(14, kDarkColor, 'New Password')!,
                     CustomTextFormField(
                       icon: icon,
                       label: '',
                       keyboardType: keyboardtype,
                     ),
-                    SizedBox(height: height * 0.08),
+                    SizedBox(height: height * 0.05),
                     boldTextStyle(14, kDarkColor, 'Confirm Password')!,
                     CustomTextFormField(
                       icon: icon,
@@ -75,20 +80,22 @@ class CustomEditScreen extends StatelessWidget {
                     ),
                   ],
                 )),
-            kheight50,
-            SizedBox(
-              height: height * 0.07,
-              width: width * 0.9,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const ScreenProfile(),
-                  ));
-                },
-                child: boldTextStyle(13, kWhiteColor, 'Save'),
-              ),
-            ),
           ],
+        ),
+      ),
+      bottomSheet: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: SizedBox(
+          height: height * 0.07,
+          width: width * 0.9,
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const ScreenProfile(),
+              ));
+            },
+            child: boldTextStyle(13, kWhiteColor, 'Save'),
+          ),
         ),
       ),
     );

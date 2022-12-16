@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/state_manager.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
 import 'package:smartbuy/presentation/main_page/screen_mainpage.dart';
@@ -79,11 +81,7 @@ class ScreenLogin extends StatelessWidget {
                 width: width * 0.9,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                          builder: (context) => ScreenMainPage(),
-                        ),
-                        (route) => false);
+                    Get.offAll(() => ScreenMainPage());
                   },
                   child: boldTextStyle(13, kWhiteColor, 'Sign In'),
                 ),
@@ -131,9 +129,7 @@ class ScreenLogin extends StatelessWidget {
                   GestureDetector(
                     child: boldTextStyle(14, kBlueColor, '\tRegister')!,
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const ScreenRegistration(),
-                      ));
+                      Get.to(() => const ScreenRegistration());
                     },
                   ),
                 ],

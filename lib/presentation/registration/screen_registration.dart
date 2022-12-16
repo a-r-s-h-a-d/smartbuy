@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
 import 'package:smartbuy/presentation/login/screen_login.dart';
@@ -10,6 +11,7 @@ class ScreenRegistration extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final formKey = GlobalKey<FormState>();
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -37,12 +39,21 @@ class ScreenRegistration extends StatelessWidget {
                   icon: Icons.person_outline,
                   label: 'Full name',
                   keyboardType: TextInputType.name,
+                  // validator: (value) {
+                  //   value.isEmpty
+                  //       ? 'Enter Your Name'
+                  //       : RegExp('!@#<>?":_``~;[]|=-+)(*&^%1234567890')
+                  //               .hasMatch(value)
+                  //           ? 'Enter a Valid Name'
+                  //           : null;
+                  // },
                 ),
                 SizedBox(height: height * 0.020),
                 const CustomTextFormField(
                   icon: Icons.email_outlined,
                   label: 'Email Address',
                   keyboardType: TextInputType.emailAddress,
+                  //validator: (value) {},
                 ),
                 SizedBox(height: height * 0.020),
                 const CustomTextFormField(
@@ -68,9 +79,8 @@ class ScreenRegistration extends StatelessWidget {
                   width: width * 0.9,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const ScreenLogin(),
-                      ));
+                      //if (formKey.currentState!.validate()) {}
+                      Get.off(() => const ScreenLogin());
                     },
                     child: boldTextStyle(13, kWhiteColor, 'Sign Up'),
                   ),
@@ -83,9 +93,7 @@ class ScreenRegistration extends StatelessWidget {
                     GestureDetector(
                       child: boldTextStyle(14, kBlueColor, '\tSign In')!,
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const ScreenLogin(),
-                        ));
+                        Get.off(() => const ScreenLogin());
                       },
                     ),
                   ],

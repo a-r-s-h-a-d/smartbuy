@@ -4,16 +4,15 @@ import 'package:smartbuy/presentation/cart/screen_cart.dart';
 import 'package:smartbuy/presentation/explore/screen_explore.dart';
 import 'package:smartbuy/presentation/home/screen_home.dart';
 import 'package:smartbuy/presentation/main_page/widgets/bottom_nav.dart';
-import 'package:smartbuy/presentation/offer/screen_offer.dart';
 
 class ScreenMainPage extends StatelessWidget {
   ScreenMainPage({super.key});
 
   final _pages = [
-    const ScreenHome(),
+    ScreenHome(),
     const ScreenExplore(),
     const ScreenCart(),
-    const ScreenOffer(),
+    // const ScreenOffer(),
     const ScreenAccount(),
   ];
 
