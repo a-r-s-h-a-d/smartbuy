@@ -46,7 +46,7 @@ class ScreenProfile extends StatelessWidget {
                 ],
               ),
               kheight50,
-              const AccountTile(
+              AccountTile(
                 icon: Icons.person_outline,
                 title: 'Muhammed Arshad K A',
                 route: CustomEditScreen(
@@ -61,7 +61,7 @@ class ScreenProfile extends StatelessWidget {
                 route: Gender(),
               ),
               kheight10,
-              const AccountTile(
+              AccountTile(
                 icon: Icons.calendar_month,
                 title: '16-05-2000',
                 route: CustomEditScreen(
@@ -70,7 +70,7 @@ class ScreenProfile extends StatelessWidget {
                     keyboardtype: TextInputType.datetime),
               ),
               kheight10,
-              const AccountTile(
+              AccountTile(
                 icon: Icons.mail_outline,
                 title: 'arshad@gmail.com',
                 route: CustomEditScreen(
@@ -79,16 +79,16 @@ class ScreenProfile extends StatelessWidget {
                     keyboardtype: TextInputType.emailAddress),
               ),
               kheight10,
-              const AccountTile(
+              AccountTile(
                 icon: Icons.smartphone,
                 title: '+91 9446854779',
                 route: CustomEditScreen(
                     fieldname: 'Phone Number',
                     icon: Icons.smartphone,
-                    keyboardtype: TextInputType.emailAddress),
+                    keyboardtype: TextInputType.phone),
               ),
               kheight10,
-              const AccountTile(
+              AccountTile(
                 icon: Icons.lock_outline,
                 title: 'Change Password',
                 route: CustomEditScreen(

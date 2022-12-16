@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
-import 'package:smartbuy/presentation/cart/screen_cart.dart';
 import 'package:smartbuy/presentation/home/widgets/heading.dart';
 import 'package:smartbuy/presentation/product_details/screen_product_details.dart';
 
@@ -55,7 +54,7 @@ class ScreenOrderDetails extends StatelessWidget {
                                 height * 0.015, kDarkColor, 'Product Name')!,
                             Row(
                               children: const [
-                                Button(icon: Icons.favorite_border),
+                                //Button(icon: Icons.favorite_border),
                               ],
                             )
                           ],

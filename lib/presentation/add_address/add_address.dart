@@ -3,6 +3,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
+import 'package:smartbuy/presentation/address/screen_address.dart';
 import 'package:smartbuy/presentation/widgets/customtextformfield.dart';
 
 class ScreenAddAddress extends StatelessWidget {
@@ -27,56 +28,83 @@ class ScreenAddAddress extends StatelessWidget {
         child: ListView(
           children: [
             boldTextStyle(14, kDarkColor, 'Country/Region')!,
-            const CustomTextFormField(
+            CustomTextFormField(
               label: '',
               keyboardType: TextInputType.name,
+              validator: (value) {
+                return null;
+              },
             ),
             kheight20,
             boldTextStyle(14, kDarkColor, 'First Name')!,
-            const CustomTextFormField(
+            CustomTextFormField(
               label: '',
               keyboardType: TextInputType.name,
+              validator: (value) {
+                return null;
+              },
             ),
             kheight20,
             boldTextStyle(14, kDarkColor, 'Last Name')!,
-            const CustomTextFormField(
+            CustomTextFormField(
               label: '',
               keyboardType: TextInputType.name,
+              validator: (value) {
+                return null;
+              },
             ),
             kheight20,
             boldTextStyle(14, kDarkColor, 'Street Address')!,
-            const CustomTextFormField(
+            CustomTextFormField(
               label: '',
               keyboardType: TextInputType.name,
+              validator: (value) {
+                return null;
+              },
             ),
             kheight20,
             boldTextStyle(14, kDarkColor, 'Street Address 2 (Optional)')!,
-            const CustomTextFormField(
+            CustomTextFormField(
               label: '',
               keyboardType: TextInputType.name,
+              validator: (value) {
+                return null;
+              },
             ),
             boldTextStyle(14, kDarkColor, 'City')!,
-            const CustomTextFormField(
+            CustomTextFormField(
               label: '',
               keyboardType: TextInputType.name,
+              validator: (value) {
+                return null;
+              },
             ),
             kheight20,
             boldTextStyle(14, kDarkColor, 'State/Provinance/Region')!,
-            const CustomTextFormField(
+            CustomTextFormField(
               label: '',
               keyboardType: TextInputType.name,
+              validator: (value) {
+                return null;
+              },
             ),
             kheight20,
             boldTextStyle(14, kDarkColor, 'ZipCode')!,
-            const CustomTextFormField(
+            CustomTextFormField(
               label: '',
               keyboardType: TextInputType.name,
+              validator: (value) {
+                return null;
+              },
             ),
             kheight20,
             boldTextStyle(14, kDarkColor, 'Phone Number')!,
-            const CustomTextFormField(
+            CustomTextFormField(
               label: '',
               keyboardType: TextInputType.name,
+              validator: (value) {
+                return null;
+              },
             ),
             kheight20,
             SizedBox(
@@ -84,7 +112,9 @@ class ScreenAddAddress extends StatelessWidget {
               width: width * 0.9,
               child: ElevatedButton(
                 onPressed: () {
-                  Get.to(() => const ScreenAddAddress());
+                  Get.to(() => const ScreenAddress(
+                        screenname: 'Address',
+                      ));
                 },
                 child: boldTextStyle(13, kWhiteColor, 'Save'),
               ),

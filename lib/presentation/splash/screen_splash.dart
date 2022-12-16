@@ -10,7 +10,7 @@ class ScreenSplash extends StatelessWidget {
 
   void initState(BuildContext context) {
     Future.delayed(
-        const Duration(seconds: 3), () => Get.off(() => const ScreenLogin()));
+        const Duration(seconds: 3), () => Get.off(() => ScreenLogin()));
   }
 
   @override

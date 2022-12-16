@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/button_list.dart';
-import 'package:flutter_signin_button/button_view.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/state_manager.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:get/get.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
 import 'package:smartbuy/presentation/main_page/screen_mainpage.dart';
@@ -11,11 +9,10 @@ import 'package:smartbuy/presentation/widgets/app_logo.dart';
 import 'package:smartbuy/presentation/widgets/customtextformfield.dart';
 
 class ScreenLogin extends StatelessWidget {
-  const ScreenLogin({super.key});
+  ScreenLogin({super.key});
 
-  // final emailController = TextEditingController();
-  // final passwordController = TextEditingController();
-  // final _formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -24,117 +21,119 @@ class ScreenLogin extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: height * 0.10, width: width * 2),
-              const AppLogo(
-                labelColor: kWhiteColor,
-                label: 'smartbuy',
-                size: 11,
-                boxColor: kBlueColor,
-              ),
-              SizedBox(height: height * 0.045),
-              Text('Welcome to smartbuy', style: kheading1),
-              SizedBox(height: height * 0.01),
-              const Text('Sign in to continue',
-                  style: TextStyle(color: kSilver, fontSize: 12)),
-              SizedBox(height: height * 0.045),
-              const CustomTextFormField(
-                icon: Icons.email_outlined,
-                label: 'Enter Email ID',
-                keyboardType: TextInputType.emailAddress,
-                // controller: emailController,
-                // validator: (value) {
-                //   if (value == null || value.isEmpty) {
-                //     return "Please Enter an email";
-                //   }
-                //   if (!RegExp(
-                //           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                //       .hasMatch(value)) {
-                //     return "Please enter a valid email";
-                //   }
-                //   return null;
-                // },
-              ),
-              SizedBox(height: height * 0.020),
-              const CustomTextFormField(
-                icon: Icons.lock_outline,
-                label: 'Password',
-                keyboardType: TextInputType.visiblePassword,
-                // controller: passwordController,
-                // validator: (value) {
-                //   if (value == null || value.isEmpty) {
-                //     return "Please Enter the Password";
-                //   }
-                //   if (!RegExp(
-                //           r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
-                //       .hasMatch(value)) {
-                //     return "Please enter valid Password";
-                //   }
-                //   return null;
-                // },
-              ),
-              SizedBox(height: height * 0.03),
-              SizedBox(
-                height: height * 0.07,
-                width: width * 0.9,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Get.offAll(() => ScreenMainPage());
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: height * 0.10, width: width * 2),
+                const AppLogo(
+                  labelColor: kWhiteColor,
+                  label: 'smartbuy',
+                  size: 11,
+                  boxColor: kBlueColor,
+                ),
+                SizedBox(height: height * 0.045),
+                Text('Welcome to smartbuy', style: kheading1),
+                SizedBox(height: height * 0.01),
+                const Text('Sign in to continue',
+                    style: TextStyle(color: kSilver, fontSize: 12)),
+                SizedBox(height: height * 0.045),
+                CustomTextFormField(
+                  icon: Icons.email_outlined,
+                  label: 'Email ID',
+                  keyboardType: TextInputType.emailAddress,
+                  //controller: emailcontroller,
+                  validator: (value) {
+                    if (value.isEmpty || value == null) {
+                      return "Please enter an email";
+                    }
+                    if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                      return 'Invalid email';
+                    }
+                    return null;
                   },
-                  child: boldTextStyle(13, kWhiteColor, 'Sign In'),
                 ),
-              ),
-              SizedBox(height: height * 0.03),
-              Row(
-                children: [
-                  const Expanded(
-                    child: Divider(
-                      thickness: 2,
-                    ),
-                  ),
-                  boldTextStyle(15, kSilver, 'OR')!,
-                  const Expanded(
-                    child: Divider(
-                      thickness: 2,
-                    ),
-                  ),
-                ],
-              ),
-              SignInButton(
-                Buttons.Google,
-                onPressed: () {},
-                padding: const EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 65,
+                SizedBox(height: height * 0.020),
+                CustomTextFormField(
+                  icon: Icons.lock_outline,
+                  label: 'Password',
+                  keyboardType: TextInputType.visiblePassword,
+                  validator: (value) {
+                    var passNonNullValue = value ?? "";
+                    if (passNonNullValue.isEmpty) {
+                      return ("Password is required");
+                    } else if (passNonNullValue.length < 6) {
+                      return ("Password Must be more than 5 characters");
+                    }
+                    return null;
+                  },
                 ),
-                text: "Login With Google",
-              ),
-              SizedBox(height: height * 0.02),
-              SignInButton(
-                Buttons.FacebookNew,
-                onPressed: () {},
-                padding: const EdgeInsets.symmetric(
-                  vertical: 15,
-                  horizontal: 65,
-                ),
-                text: "Login With fb",
-              ),
-              SizedBox(height: height * 0.02),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  regularTextStyle(12, kSilver, "Don't have an Account?")!,
-                  GestureDetector(
-                    child: boldTextStyle(14, kBlueColor, '\tRegister')!,
-                    onTap: () {
-                      Get.to(() => const ScreenRegistration());
+                SizedBox(height: height * 0.03),
+                SizedBox(
+                  height: height * 0.07,
+                  width: width * 0.9,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        Get.offAll(() => ScreenMainPage());
+                      }
                     },
+                    child: boldTextStyle(13, kWhiteColor, 'Sign In'),
                   ),
-                ],
-              )
-            ],
+                ),
+                SizedBox(height: height * 0.03),
+                Row(
+                  children: [
+                    const Expanded(
+                      child: Divider(
+                        thickness: 2,
+                      ),
+                    ),
+                    boldTextStyle(15, kSilver, 'OR')!,
+                    const Expanded(
+                      child: Divider(
+                        thickness: 2,
+                      ),
+                    ),
+                  ],
+                ),
+                SignInButton(
+                  Buttons.Google,
+                  onPressed: () {},
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 65,
+                  ),
+                  text: "Login With Google",
+                ),
+                SizedBox(height: height * 0.02),
+                SignInButton(
+                  Buttons.FacebookNew,
+                  onPressed: () {},
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 15,
+                    horizontal: 65,
+                  ),
+                  text: "Login With fb",
+                ),
+                SizedBox(height: height * 0.02),
+                regularTextStyle(12, kSilver, "Forgot Password?")!,
+                SizedBox(height: height * 0.02),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    regularTextStyle(12, kSilver, "Don't have an Account?")!,
+                    GestureDetector(
+                      child: boldTextStyle(14, kBlueColor, '\tRegister')!,
+                      onTap: () {
+                        Get.to(() => ScreenRegistration());
+                      },
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

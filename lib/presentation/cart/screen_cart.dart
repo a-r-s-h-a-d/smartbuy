@@ -28,8 +28,7 @@ class ScreenCart extends StatelessWidget {
         child: ListView(
           children: [
             Container(
-              height: height * 0.1,
-              width: 100,
+              height: height * 0.20,
               decoration: BoxDecoration(
                 border: Border.all(color: kSilver),
                 borderRadius: BorderRadius.circular(10),
@@ -42,8 +41,12 @@ class ScreenCart extends StatelessWidget {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    boldTextStyle(height * 0.015, kDarkColor, 'Product Name')!,
+                    SizedBox(
+                        width: width * 0.32,
+                        child: boldTextStyle(
+                            height * 0.015, kDarkColor, 'Product Name')!),
                     Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: const [
                         Button(icon: Icons.favorite_border),
                         Button(icon: Icons.delete)
@@ -51,42 +54,45 @@ class ScreenCart extends StatelessWidget {
                     )
                   ],
                 ),
-                subtitle: Row(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: kWhiteColor,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: kSilver,
-                            blurRadius: 5,
-                            spreadRadius: 1,
-                          ),
-                        ],
+                subtitle: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 60.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: kWhiteColor,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: kSilver,
+                              blurRadius: 5,
+                              spreadRadius: 1,
+                            ),
+                          ],
+                        ),
+                        child: const Icon(Icons.remove),
                       ),
-                      child: const Icon(Icons.remove),
-                    ),
-                    SizedBox(width: width * 0.05),
-                    boldTextStyle(16, kDarkColor, '1')!,
-                    SizedBox(width: width * 0.05),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: kWhiteColor,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: kSilver,
-                            blurRadius: 5,
-                            spreadRadius: 1,
-                          ),
-                        ],
+                      SizedBox(width: width * 0.05),
+                      boldTextStyle(16, kDarkColor, '1')!,
+                      SizedBox(width: width * 0.05),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: kWhiteColor,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: kSilver,
+                              blurRadius: 5,
+                              spreadRadius: 1,
+                            ),
+                          ],
+                        ),
+                        child: const Icon(Icons.add),
                       ),
-                      child: const Icon(Icons.add),
-                    ),
-                    const Spacer(),
-                    boldTextStyle(14, kDarkColor, '₹7500')!
-                  ],
+                      const Spacer(),
+                      boldTextStyle(14, kDarkColor, '₹7500')!
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -142,7 +148,12 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        IconButton(onPressed: () {}, icon: Icon(icon)),
+        IconButton(
+            onPressed: () {},
+            icon: Icon(
+              icon,
+              size: 30,
+            )),
       ],
     );
   }

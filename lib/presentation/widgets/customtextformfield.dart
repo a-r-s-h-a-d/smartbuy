@@ -5,10 +5,14 @@ class CustomTextFormField extends StatelessWidget {
   final IconData? icon;
   final String label;
   final TextInputType keyboardType;
+  final TextEditingController? controller;
+  final String? Function(dynamic value) validator;
   const CustomTextFormField({
     this.icon,
     required this.label,
     required this.keyboardType,
+    this.controller,
+    required this.validator,
     super.key,
   });
 
@@ -26,6 +30,8 @@ class CustomTextFormField extends StatelessWidget {
         ),
       ),
       textInputAction: TextInputAction.next,
+      validator: validator,
+      controller: controller,
     );
   }
 }
