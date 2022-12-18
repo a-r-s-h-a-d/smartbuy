@@ -75,9 +75,10 @@ class ScreenLogin extends StatelessWidget {
                   width: width * 0.9,
                   child: ElevatedButton(
                     onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        Get.offAll(() => ScreenMainPage());
-                      }
+                      // if (formKey.currentState!.validate()) {
+                      //   Get.offAll(() => ScreenMainPage());
+                      // }
+                      Get.offAll(() => ScreenMainPage());
                     },
                     child: boldTextStyle(13, kWhiteColor, 'Sign In'),
                   ),

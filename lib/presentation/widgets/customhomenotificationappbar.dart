@@ -37,7 +37,7 @@ class CustomHomeNotificationAppBar extends StatelessWidget {
                   Get.to(() =>
                       const ViewProductsandWishlist(screenname: 'wishlist'));
                 },
-                icon: const Icon(Icons.favorite_border),
+                icon: const Icon(Icons.favorite),
               ),
               IconButton(
                 onPressed: () {

@@ -58,7 +58,7 @@ class Gender extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => const ScreenProfile(),
+                builder: (context) => ScreenProfile(),
               ));
             },
             child: boldTextStyle(13, kWhiteColor, 'Save'),

@@ -23,22 +23,22 @@ class ScreenAccount extends StatelessWidget {
           ),
         ),
         body: ListView(
-          children: const [
+          children: [
             AccountTile(
                 icon: Icons.person_outline,
                 title: 'Profile',
                 route: ScreenProfile()),
-            AccountTile(
+            const AccountTile(
               icon: Icons.shopping_bag_outlined,
               title: 'Order',
               route: ScreenOrder(),
             ),
-            AccountTile(
+            const AccountTile(
               icon: Icons.location_on_outlined,
               title: 'Address',
               route: ScreenAddress(screenname: 'Address'),
             ),
-            AccountTile(
+            const AccountTile(
               icon: Icons.payment,
               title: 'Payment',
               route: ScreenPayment(),

@@ -50,23 +50,25 @@ class ScreenAddress extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         boldTextStyle(14, kDarkColor, 'Name')!,
-                        regularTextStyle(12, ksilverOriginal, 'Address')!,
-                        regularTextStyle(12, ksilverOriginal, 'mobile')!,
+                        regularTextStyle(
+                            12, const Color(0xFF08415C), 'Address')!,
+                        regularTextStyle(
+                            12, const Color(0xFF08415C), 'mobile')!,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             SizedBox(
                               height: height * 0.05,
                               width: width * 0.3,
-                              child: ElevatedButton(
+                              child: TextButton(
                                 onPressed: () {},
-                                child: boldTextStyle(13, kWhiteColor, 'Edit'),
+                                child: boldTextStyle(13, kBlueColor, 'Edit')!,
                               ),
                             ),
                             SizedBox(
                               height: height * 0.05,
                               width: width * 0.3,
-                              child: ElevatedButton(
+                              child: TextButton(
                                 onPressed: () {
                                   Get.defaultDialog(
                                     radius: 10.0,
@@ -95,7 +97,8 @@ class ScreenAddress extends StatelessWidget {
                                     ),
                                   );
                                 },
-                                child: boldTextStyle(13, kWhiteColor, 'Remove'),
+                                child: boldTextStyle(
+                                    13, const Color(0xFFEE4B2B), 'Remove')!,
                               ),
                             ),
                           ],

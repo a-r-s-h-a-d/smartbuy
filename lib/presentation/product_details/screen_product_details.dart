@@ -130,8 +130,8 @@ class ScreenProductDetails extends StatelessWidget {
                     ),
 
                     SizedBox(
-                      height: height * 0.7,
-                      child: const ReviewModel(itemCount: 3),
+                      height: height * 0.6,
+                      child: const ReviewModel(itemCount: 2),
                     ),
 
                     SizedBox(

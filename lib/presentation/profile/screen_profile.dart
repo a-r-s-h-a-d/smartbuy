@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
 import 'package:smartbuy/presentation/account/widgets/account_tile.dart';
@@ -7,8 +8,9 @@ import 'package:smartbuy/presentation/profile/widgets/custom_editprofile.dart';
 import 'package:smartbuy/presentation/profile/widgets/gender.dart';
 
 class ScreenProfile extends StatelessWidget {
-  const ScreenProfile({super.key});
+  ScreenProfile({super.key});
 
+  final ImagePicker pickedImage = ImagePicker();
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -39,7 +41,7 @@ class ScreenProfile extends StatelessWidget {
                   ),
                   Column(
                     children: const [
-                      Button(icon: Icons.add_a_photo_outlined),
+                      Button(icon: Icons.photo_library_sharp),
                       Button(icon: Icons.delete),
                     ],
                   )

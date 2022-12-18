@@ -54,7 +54,7 @@ class ScreenHome extends StatelessWidget {
                               children: [
                                 const Headings(
                                     title: 'Popular Brands',
-                                    navtitle: 'Explore'),
+                                    navtitle: 'See More'),
                                 kheight10,
                                 SizedBox(
                                   height: height * .13,

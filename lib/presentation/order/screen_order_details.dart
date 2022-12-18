@@ -22,16 +22,23 @@ class ScreenOrderDetails extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(
+                  height: height * 0.1,
+                  child: Stepper(
+                    type: StepperType.horizontal,
+                    steps: getSteps(),
+                  ),
+                ),
                 boldTextStyle(14, kDarkColor, 'Product(10)')!,
                 kheight10,
                 SizedBox(
-                  height: height * 0.35,
+                  height: height * 0.3,
                   child: ListView.separated(
                     separatorBuilder: (context, index) => kheight20,
                     itemCount: 10,
@@ -120,4 +127,23 @@ class ScreenOrderDetails extends StatelessWidget {
       ),
     );
   }
+
+  List<Step> getSteps() => [
+        Step(
+          title: regularTextStyle(8, ksilverOriginal, 'Packing')!,
+          content: Container(),
+        ),
+        Step(
+          title: regularTextStyle(8, ksilverOriginal, 'Shipping')!,
+          content: Container(),
+        ),
+        Step(
+          title: regularTextStyle(8, ksilverOriginal, 'Arriving')!,
+          content: Container(),
+        ),
+        Step(
+          title: regularTextStyle(8, ksilverOriginal, 'Delivered')!,
+          content: Container(),
+        )
+      ];
 }
