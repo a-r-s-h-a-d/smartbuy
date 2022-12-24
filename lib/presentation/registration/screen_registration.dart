@@ -4,7 +4,7 @@ import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
 import 'package:smartbuy/presentation/login/screen_login.dart';
 import 'package:smartbuy/presentation/widgets/app_logo.dart';
-import 'package:smartbuy/presentation/widgets/customtextformfield.dart';
+import 'package:smartbuy/presentation/widgets/custom_text_form_field.dart';
 
 class ScreenRegistration extends StatelessWidget {
   ScreenRegistration({super.key});
@@ -43,12 +43,12 @@ class ScreenRegistration extends StatelessWidget {
                     keyboardType: TextInputType.name,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "Please enter Full Name";
+                        return "Please enter your full name";
                       }
                       if (!RegExp(
                               r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$")
                           .hasMatch(value)) {
-                        return 'Please enter valid Name';
+                        return 'Sorry,enter a valid name';
                       }
                       return null;
                     },
@@ -60,10 +60,10 @@ class ScreenRegistration extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value.isEmpty || value == null) {
-                        return "Please enter an email";
+                        return "Choose an email address";
                       }
                       if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                        return 'Invalid email';
+                        return 'Sorry, enter a valid email address';
                       }
                       return null;
                     },
@@ -75,10 +75,10 @@ class ScreenRegistration extends StatelessWidget {
                     keyboardType: TextInputType.phone,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "Please enter a Contact number";
+                        return "Please enter a contact number";
                       }
                       if (value.length != 10) {
-                        return 'Mobile Number must be of 10 digit';
+                        return 'Mobile number must be of 10 digits';
                       }
                       return null;
                     },
@@ -92,9 +92,9 @@ class ScreenRegistration extends StatelessWidget {
                     validator: (value) {
                       var passNonNullValue = value ?? "";
                       if (passNonNullValue.isEmpty) {
-                        return ("Password is required");
+                        return ("Please enter a password");
                       } else if (passNonNullValue.length < 6) {
-                        return ("Password Must be more than 5 characters");
+                        return ("Password must be more than 5 characters");
                       }
                       return null;
                     },
@@ -105,7 +105,9 @@ class ScreenRegistration extends StatelessWidget {
                     label: 'Re-enter the password',
                     keyboardType: TextInputType.visiblePassword,
                     validator: (value) {
-                      if (passwordcontroller.text != value) {
+                      if (value.isEmpty || value == null) {
+                        return 'Please re-enter the password';
+                      } else if (passwordcontroller.text != value) {
                         return "Password doesn't matched";
                       }
                       return null;
@@ -118,6 +120,18 @@ class ScreenRegistration extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
+                          Get.snackbar(
+                            "Account is Created",
+                            "Sign in to Continue",
+                            icon: const Icon(Icons.person, color: Colors.white),
+                            snackPosition: SnackPosition.TOP,
+                            borderRadius: 20,
+                            margin: const EdgeInsets.all(20),
+                            colorText: kDarkColor,
+                            duration: const Duration(seconds: 2),
+                            isDismissible: true,
+                            forwardAnimationCurve: Curves.easeOutBack,
+                          );
                           Get.off(() => ScreenLogin());
                         }
                       },

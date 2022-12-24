@@ -11,16 +11,17 @@ class Carousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final height = MediaQuery.of(context).size.height;
     return CarouselSlider(
       items: imgList
-          .map((item) => Center(
-                  child: Image.network(
+          .map(
+            (item) => Center(
+              child: Image.network(
                 item,
                 fit: BoxFit.fill,
                 width: double.infinity,
-                // height: height * 0.4,
-              )))
+              ),
+            ),
+          )
           .toList(),
       options: CarouselOptions(
         aspectRatio: 4 / 3,
@@ -35,7 +36,6 @@ class Carousel extends StatelessWidget {
         enlargeCenterPage: true,
         enlargeFactor: 0.3,
         scrollDirection: Axis.horizontal,
-        // onPageChanged: (index, reason) => ,
       ),
     );
   }

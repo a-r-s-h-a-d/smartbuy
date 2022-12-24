@@ -4,7 +4,7 @@ import 'package:get/instance_manager.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
 import 'package:smartbuy/presentation/order/screen_order_details.dart';
-import 'package:smartbuy/presentation/product_details/screen_product_details.dart';
+import 'package:smartbuy/presentation/widgets/custom_tile.dart';
 
 class ScreenOrder extends StatelessWidget {
   const ScreenOrder({super.key});

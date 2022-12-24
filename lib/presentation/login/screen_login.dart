@@ -6,7 +6,7 @@ import 'package:smartbuy/core/constants.dart';
 import 'package:smartbuy/presentation/main_page/screen_mainpage.dart';
 import 'package:smartbuy/presentation/registration/screen_registration.dart';
 import 'package:smartbuy/presentation/widgets/app_logo.dart';
-import 'package:smartbuy/presentation/widgets/customtextformfield.dart';
+import 'package:smartbuy/presentation/widgets/custom_text_form_field.dart';
 
 class ScreenLogin extends StatelessWidget {
   ScreenLogin({super.key});
@@ -43,10 +43,9 @@ class ScreenLogin extends StatelessWidget {
                   icon: Icons.email_outlined,
                   label: 'Email ID',
                   keyboardType: TextInputType.emailAddress,
-                  //controller: emailcontroller,
                   validator: (value) {
                     if (value.isEmpty || value == null) {
-                      return "Please enter an email";
+                      return "email is required";
                     }
                     if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
                       return 'Invalid email';

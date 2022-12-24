@@ -12,7 +12,8 @@ class ReviewModel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      physics: const ScrollPhysics(),
+      // shrinkWrap: true,
+      // physics: const ScrollPhysics(),
       itemBuilder: (context, index) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

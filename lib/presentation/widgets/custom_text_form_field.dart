@@ -21,7 +21,12 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       keyboardType: keyboardType,
       decoration: InputDecoration(
-        prefixIcon: Icon(icon),
+        prefixIcon: icon == null
+            ? null
+            : Icon(
+                icon,
+                size: 25,
+              ),
         isDense: true,
         labelText: label,
         labelStyle: const TextStyle(color: kSilver, fontSize: 12),
@@ -32,6 +37,7 @@ class CustomTextFormField extends StatelessWidget {
       textInputAction: TextInputAction.next,
       validator: validator,
       controller: controller,
+      obscureText: keyboardType == TextInputType.visiblePassword ? true : false,
     );
   }
 }

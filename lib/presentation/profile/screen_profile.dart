@@ -3,9 +3,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
 import 'package:smartbuy/presentation/account/widgets/account_tile.dart';
-import 'package:smartbuy/presentation/cart/screen_cart.dart';
 import 'package:smartbuy/presentation/profile/widgets/custom_editprofile.dart';
 import 'package:smartbuy/presentation/profile/widgets/gender.dart';
+import 'package:smartbuy/presentation/widgets/custom_button.dart';
 
 class ScreenProfile extends StatelessWidget {
   ScreenProfile({super.key});
@@ -52,9 +52,11 @@ class ScreenProfile extends StatelessWidget {
                 icon: Icons.person_outline,
                 title: 'Muhammed Arshad K A',
                 route: CustomEditScreen(
-                    fieldname: 'Full Name',
-                    icon: Icons.person_outline,
-                    keyboardtype: TextInputType.name),
+                  fieldname: 'Full Name',
+                  icon: Icons.person_outline,
+                  keyboardtype: TextInputType.name,
+                  fieldvalues: 'Muhammed Arshad',
+                ),
               ),
               kheight10,
               const AccountTile(
@@ -67,9 +69,11 @@ class ScreenProfile extends StatelessWidget {
                 icon: Icons.calendar_month,
                 title: '16-05-2000',
                 route: CustomEditScreen(
-                    fieldname: 'Date of Birth',
-                    icon: Icons.calendar_month,
-                    keyboardtype: TextInputType.datetime),
+                  fieldname: 'Date of Birth',
+                  icon: Icons.calendar_month,
+                  keyboardtype: TextInputType.datetime,
+                  fieldvalues: '16-05-2000',
+                ),
               ),
               kheight10,
               AccountTile(
@@ -78,25 +82,30 @@ class ScreenProfile extends StatelessWidget {
                 route: CustomEditScreen(
                     fieldname: 'e-mail',
                     icon: Icons.mail_outline,
-                    keyboardtype: TextInputType.emailAddress),
+                    keyboardtype: TextInputType.emailAddress,
+                    fieldvalues: 'arshad@gmail.com'),
               ),
               kheight10,
               AccountTile(
                 icon: Icons.smartphone,
                 title: '+91 9446854779',
                 route: CustomEditScreen(
-                    fieldname: 'Phone Number',
-                    icon: Icons.smartphone,
-                    keyboardtype: TextInputType.phone),
+                  fieldname: 'Phone Number',
+                  icon: Icons.smartphone,
+                  keyboardtype: TextInputType.phone,
+                  fieldvalues: "9446854779",
+                ),
               ),
               kheight10,
               AccountTile(
                 icon: Icons.lock_outline,
                 title: 'Change Password',
                 route: CustomEditScreen(
-                    fieldname: 'Old Password',
-                    icon: Icons.lock_outline,
-                    keyboardtype: TextInputType.visiblePassword),
+                  fieldname: 'Old Password',
+                  icon: Icons.lock_outline,
+                  keyboardtype: TextInputType.visiblePassword,
+                  fieldvalues: 'gdsgyad',
+                ),
               ),
             ],
           ),

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
-import 'package:smartbuy/presentation/home/widgets/carousel.dart';
-import 'package:smartbuy/presentation/main_page/widgets/bottom_nav.dart';
+import 'package:smartbuy/presentation/product_details/widgets/bottom_sheet_button.dart';
+import 'package:smartbuy/presentation/product_details/widgets/color_and_size.dart';
+import 'package:smartbuy/presentation/widgets/custom_tile.dart';
+import 'package:smartbuy/presentation/widgets/carousel.dart';
 import 'package:smartbuy/presentation/review/screen_review.dart';
 import 'package:smartbuy/presentation/review/widgets/review_model.dart';
 
@@ -39,10 +40,15 @@ class ScreenProductDetails extends StatelessWidget {
         ),
       ),
       body: ListView(
+        shrinkWrap: true,
+        physics: const ScrollPhysics(),
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              //
+              //carousel
+              //
               SizedBox(
                 height: height * 0.4,
                 width: double.infinity,
@@ -65,13 +71,13 @@ class ScreenProductDetails extends StatelessWidget {
                       ],
                     ),
                     kheight10,
-                    RatingBar.builder(
-                      itemBuilder: (context, _) => const Icon(
-                        Icons.star,
-                        color: Colors.yellow,
-                      ),
-                      onRatingUpdate: (rating) {},
-                    ),
+                    // RatingBar.builder(
+                    //   itemBuilder: (context, _) => const Icon(
+                    //     Icons.star,
+                    //     color: Colors.yellow,
+                    //   ),
+                    //   onRatingUpdate: (rating) {},
+                    // ),
                     kheight10,
                     boldTextStyle(16, kBlueColor, '₹ $price')!,
                     kheight20,
@@ -130,20 +136,8 @@ class ScreenProductDetails extends StatelessWidget {
                     ),
 
                     SizedBox(
-                      height: height * 0.6,
-                      child: const ReviewModel(itemCount: 2),
-                    ),
-
-                    SizedBox(
-                      height: height * 0.07,
-                      width: width * 0.9,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Get.back();
-                          indexChangeNotifier.value = 2;
-                        },
-                        child: boldTextStyle(13, kWhiteColor, 'Add to Cart'),
-                      ),
+                      height: height * 0.4,
+                      child: const ReviewModel(itemCount: 1),
                     ),
                   ],
                 ),
@@ -152,49 +146,30 @@ class ScreenProductDetails extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
-}
-
-class CustomTile extends StatelessWidget {
-  final String title;
-  final String trailing;
-
-  const CustomTile({
-    required this.title,
-    required this.trailing,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: regularTextStyle(12, ksilverOriginal, title),
-      trailing: regularTextStyle(12, kBlackColor, trailing),
-    );
-  }
-}
-
-class SizeAndColor extends StatelessWidget {
-  final String? size;
-  final Color? color;
-  const SizeAndColor({
-    this.size,
-    this.color,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: 21,
-      backgroundColor: kBlackColor,
-      child: CircleAvatar(
-        foregroundColor: kBlackColor,
-        backgroundColor: color == color ? color : Colors.transparent,
-        child: size == null
-            ? const Text('')
-            : boldTextStyle(22, kDarkColor, size!),
+      bottomSheet: Padding(
+        padding: const EdgeInsets.only(
+          bottom: 8,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            BottomSheetButton(
+              height: height,
+              width: width * 0.4,
+              buttoncolor: kWhiteColor,
+              labelcolor: kBlueColor,
+              label: 'Add to Cart',
+            ),
+            kwidth20,
+            BottomSheetButton(
+              height: height,
+              width: width * 0.4,
+              buttoncolor: kBlueColor,
+              labelcolor: kWhiteColor,
+              label: 'Buy now',
+            ),
+          ],
+        ),
       ),
     );
   }

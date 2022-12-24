@@ -32,18 +32,26 @@ class Gender extends StatelessWidget {
                 border: Border.all(width: 1),
                 borderRadius: kBradius10,
               ),
-              child: DropdownButton<String>(
-                alignment: AlignmentDirectional.center,
-                isExpanded: true,
-                value: 'Male',
-                underline: Container(),
-                onChanged: (_) {},
-                items: <String>['Male', 'Female', 'Others'].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
+              child: DropdownButtonHideUnderline(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: DropdownButton<String>(
+                    alignment: AlignmentDirectional.bottomStart,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    isExpanded: true,
+                    value: 'Male',
+                    underline: Container(),
+                    onChanged: (_) {},
+                    items: <String>['Male', 'Female', 'Others']
+                        .map((String value) {
+                      return DropdownMenuItem<String>(
+                        alignment: Alignment.bottomCenter,
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ),
               ),
             ),
             kheight50,

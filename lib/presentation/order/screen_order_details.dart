@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
 import 'package:smartbuy/presentation/home/widgets/heading.dart';
-import 'package:smartbuy/presentation/product_details/screen_product_details.dart';
+import 'package:smartbuy/presentation/widgets/custom_tile.dart';
 
 class ScreenOrderDetails extends StatelessWidget {
   const ScreenOrderDetails({super.key});
@@ -38,7 +38,7 @@ class ScreenOrderDetails extends StatelessWidget {
                 boldTextStyle(14, kDarkColor, 'Product(10)')!,
                 kheight10,
                 SizedBox(
-                  height: height * 0.3,
+                  height: height * 0.35,
                   child: ListView.separated(
                     separatorBuilder: (context, index) => kheight20,
                     itemCount: 10,

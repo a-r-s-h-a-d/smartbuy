@@ -3,9 +3,9 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
-import 'package:smartbuy/presentation/view_products_and_wishlist/view_products_and_wishlist.dart';
+import 'package:smartbuy/presentation/screen_products_and_wishlist/screen_products_and_wishlist.dart';
 import 'package:smartbuy/presentation/widgets/brandcircle.dart';
-import 'package:smartbuy/presentation/widgets/customhomenotificationappbar.dart';
+import 'package:smartbuy/presentation/widgets/custom_home_notification_appbar.dart';
 
 class ScreenExplore extends StatelessWidget {
   const ScreenExplore({super.key});
@@ -35,7 +35,7 @@ class ScreenExplore extends StatelessWidget {
                       mainAxisSpacing: 20,
                       crossAxisSpacing: 33),
                   itemBuilder: (context, index) => InkWell(
-                    onTap: () => Get.to(() => ViewProductsandWishlist(
+                    onTap: () => Get.to(() => ScreenProductsAndWishlist(
                           screenname: 'Brand ${index + 1}',
                         )),
                     child: BrandCircle(

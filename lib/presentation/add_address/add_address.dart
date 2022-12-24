@@ -4,7 +4,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
 import 'package:smartbuy/presentation/address/screen_address.dart';
-import 'package:smartbuy/presentation/widgets/customtextformfield.dart';
+import 'package:smartbuy/presentation/widgets/custom_text_form_field.dart';
 
 class ScreenAddAddress extends StatelessWidget {
   const ScreenAddAddress({super.key});

@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:smartbuy/core/constants.dart';
-import 'package:smartbuy/presentation/home/widgets/carousel.dart';
+import 'package:smartbuy/presentation/home/widgets/brand_items_list.dart';
+import 'package:smartbuy/presentation/widgets/carousel.dart';
 import 'package:smartbuy/presentation/home/widgets/heading.dart';
-import 'package:smartbuy/presentation/home/widgets/popular_items.dart';
-import 'package:smartbuy/presentation/product_details/screen_product_details.dart';
-import 'package:smartbuy/presentation/view_products_and_wishlist/view_products_and_wishlist.dart';
-import 'package:smartbuy/presentation/widgets/brandcircle.dart';
-import 'package:smartbuy/presentation/widgets/customhomenotificationappbar.dart';
+import 'package:smartbuy/presentation/home/widgets/popular_brands.dart';
+import 'package:smartbuy/presentation/widgets/custom_home_notification_appbar.dart';
 
 class ScreenHome extends StatelessWidget {
   ScreenHome({super.key});
@@ -27,105 +23,49 @@ class ScreenHome extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: ListView(
+          shrinkWrap: true,
+          physics: const ScrollPhysics(),
+          scrollDirection: Axis.vertical,
           children: [
             Column(
               children: [
-                //appbar
+                /* custom app bar used in home & explore */
+
                 const CustomHomeNotificationAppBar(),
-                //carousel
+
+                /* carousel */
+
                 SizedBox(
                   height: height * 0.3,
                   width: double.infinity,
                   child: Carousel(imgList: imgList),
                 ),
-                //popular brands
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    kheight10,
-                    SingleChildScrollView(
-                      physics: const ScrollPhysics(),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Headings(
-                                    title: 'Popular Brands',
-                                    navtitle: 'See More'),
-                                kheight10,
-                                SizedBox(
-                                  height: height * .13,
-                                  child: ListView.builder(
-                                    itemExtent: 90,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: 10,
-                                    itemBuilder: (context, index) {
-                                      const SizedBox(width: 10);
-                                      return GestureDetector(
-                                        onTap: () {
-                                          Get.to(() => ViewProductsandWishlist(
-                                                screenname:
-                                                    'Brand ${index + 1}',
-                                              ));
-                                        },
-                                        child: BrandCircle(
-                                          label: 'Brand ${index + 1}',
-                                          image:
-                                              'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/800px-Adidas_Logo.svg.png',
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                                Column(
-                                  children: [
-                                    const Headings(
-                                        title: 'Brand Name',
-                                        navtitle: 'See More'),
-                                    SizedBox(
-                                      height: height * 0.35,
-                                      child: ListView.separated(
-                                          separatorBuilder: (context, index) =>
-                                              const SizedBox(width: 20),
-                                          scrollDirection: Axis.horizontal,
-                                          physics: const ScrollPhysics(),
-                                          shrinkWrap: true,
-                                          itemCount: 10,
-                                          itemBuilder: (context, index) {
-                                            return GestureDetector(
-                                              onTap: () {
-                                                Get.to(
-                                                    () => ScreenProductDetails(
-                                                          productname:
-                                                              'Product ${index + 1}',
-                                                          price: 'Price',
-                                                        ));
-                                              },
-                                              child: PopularItems(
-                                                height: height,
-                                                width: width,
-                                                productImage:
-                                                    'https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-                                                productname:
-                                                    'Product ${index + 1}',
-                                                price: 'Price',
-                                                screenname: 'Brand Name',
-                                              ),
-                                            );
-                                          }),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
+                kheight10,
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: height * 0.18,
+                        child: Column(
+                          children: [
+                            const Headings(
+                                title: 'Popular Brands', navtitle: 'Explore'),
+                            kheight10,
+
+                            /* list popular brands in circle */
+
+                            PopularBrands(height: height),
+                          ],
+                        ),
                       ),
-                    )
-                  ],
+
+                      /* list some items from popular brands */
+
+                      BrandItemsList(height: height, width: width),
+                    ],
+                  ),
                 ),
               ],
             ),

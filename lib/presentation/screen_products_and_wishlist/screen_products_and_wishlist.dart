@@ -3,13 +3,13 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
-import 'package:smartbuy/presentation/home/widgets/popular_items.dart';
+import 'package:smartbuy/presentation/home/widgets/product_structure.dart';
 import 'package:smartbuy/presentation/product_details/screen_product_details.dart';
 
-class ViewProductsandWishlist extends StatelessWidget {
+class ScreenProductsAndWishlist extends StatelessWidget {
   final String screenname;
 
-  const ViewProductsandWishlist({
+  const ScreenProductsAndWishlist({
     required this.screenname,
     super.key,
   });
@@ -44,7 +44,7 @@ class ViewProductsandWishlist extends StatelessWidget {
                     price: 'Price',
                   ));
             },
-            child: PopularItems(
+            child: ProductStructure(
               height: height,
               width: width,
               productImage:

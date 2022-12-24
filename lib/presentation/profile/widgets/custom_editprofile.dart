@@ -3,16 +3,18 @@ import 'package:get/get.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
 import 'package:smartbuy/presentation/account/screen_account.dart';
-import 'package:smartbuy/presentation/widgets/customtextformfield.dart';
+import 'package:smartbuy/presentation/widgets/custom_text_form_field.dart';
 
 class CustomEditScreen extends StatelessWidget {
   final String fieldname;
   final IconData icon;
   final TextInputType keyboardtype;
+  final String fieldvalues;
   CustomEditScreen({
     required this.fieldname,
     required this.icon,
     required this.keyboardtype,
+    required this.fieldvalues,
     super.key,
   });
   final TextEditingController passwordcontroller = TextEditingController();
@@ -57,6 +59,7 @@ class CustomEditScreen extends StatelessWidget {
                   CustomTextFormField(
                     icon: icon,
                     label: '',
+                    controller: TextEditingController(text: fieldvalues),
                     keyboardType: keyboardtype,
                     validator: (value) {
                       if (fieldname == 'Phone Number') {

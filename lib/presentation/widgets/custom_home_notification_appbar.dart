@@ -5,7 +5,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
 import 'package:smartbuy/presentation/notifications/screen_notification.dart';
-import 'package:smartbuy/presentation/view_products_and_wishlist/view_products_and_wishlist.dart';
+import 'package:smartbuy/presentation/screen_products_and_wishlist/screen_products_and_wishlist.dart';
 
 class CustomHomeNotificationAppBar extends StatelessWidget {
   const CustomHomeNotificationAppBar({
@@ -35,7 +35,7 @@ class CustomHomeNotificationAppBar extends StatelessWidget {
               IconButton(
                 onPressed: () {
                   Get.to(() =>
-                      const ViewProductsandWishlist(screenname: 'wishlist'));
+                      const ScreenProductsAndWishlist(screenname: 'wishlist'));
                 },
                 icon: const Icon(Icons.favorite),
               ),
@@ -49,7 +49,6 @@ class CustomHomeNotificationAppBar extends StatelessWidget {
           ),
         ),
         kheight20,
-        //const Divider(thickness: 1),
       ],
     );
   }

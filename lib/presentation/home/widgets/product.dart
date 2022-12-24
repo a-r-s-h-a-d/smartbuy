@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
 
@@ -51,7 +52,30 @@ class Product extends StatelessWidget {
                     IconButton(
                         onPressed: () {},
                         icon: screenname == 'wishlist'
-                            ? const Icon(Icons.delete)
+                            ? InkWell(
+                                child: const Icon(Icons.favorite),
+                                onTap: () {
+                                  Get.defaultDialog(
+                                    title: "Alert",
+                                    content: const Text(
+                                      'Are you sure,\nDo you really want to remove the product',
+                                      style: TextStyle(
+                                          color: kSilver, fontSize: 14),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    confirm: TextButton(
+                                        onPressed: () {},
+                                        child: regularTextStyle(
+                                            12, Colors.green, 'OK')!),
+                                    cancel: TextButton(
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        child: regularTextStyle(
+                                            12, Colors.red, 'Cancel')!),
+                                  );
+                                },
+                              )
                             : const Icon(Icons.favorite_border))
                   ],
                 ),

@@ -49,6 +49,23 @@ class ScreeWriteReview extends StatelessWidget {
             ),
             kheight50,
             boldTextStyle(12, kDarkColor, 'Add Photo')!,
+            kheight20,
+            Row(
+              children: [
+                Container(
+                  height: 80,
+                  width: 80,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      color: kWhiteColor,
+                      border: Border.all()),
+                  child: const Icon(
+                    Icons.add,
+                    size: 40,
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),

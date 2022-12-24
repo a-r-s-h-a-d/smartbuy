@@ -15,10 +15,14 @@ class BrandCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ClipRRect(
-          child: Image(
-            image: NetworkImage(image),
-            width: 50,
+        CircleAvatar(
+          radius: 30,
+          backgroundColor: const Color(0xFFD0D0D0),
+          child: ClipRRect(
+            child: Image(
+              image: NetworkImage(image),
+              width: 50,
+            ),
           ),
         ),
         const SizedBox(height: 5),

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:smartbuy/core/constants.dart';
 import 'package:smartbuy/presentation/home/widgets/product.dart';
 
-class PopularItems extends StatelessWidget {
+class ProductStructure extends StatelessWidget {
   final String screenname;
   final String productname;
   final String price;
   final String productImage;
-  const PopularItems({
+  const ProductStructure({
     Key? key,
     required this.screenname,
     required this.productImage,
@@ -23,7 +23,7 @@ class PopularItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 8.0),
+      padding: const EdgeInsets.only(left: 5.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
