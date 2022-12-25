@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
-import 'package:smartbuy/methods/forgot_password/forgot_password.dart';
+import 'package:smartbuy/authentication/forgot_password/forgot_password.dart';
 import 'package:smartbuy/presentation/widgets/custom_text_form_field.dart';
 
 class ScreenForgotPassword extends StatelessWidget {

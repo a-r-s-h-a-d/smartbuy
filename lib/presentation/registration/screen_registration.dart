@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
-import 'package:smartbuy/methods/sign_up/sign_up.dart';
+import 'package:smartbuy/authentication/sign_up/sign_up.dart';
 import 'package:smartbuy/presentation/login/screen_login.dart';
 import 'package:smartbuy/presentation/widgets/app_logo.dart';
 import 'package:smartbuy/presentation/widgets/custom_text_form_field.dart';

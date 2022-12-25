@@ -37,8 +37,9 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_rating_bar: ^4.0.1
-  flutter_signin_button: ^2.0.0
+  flutter_svg: ^1.1.6
   get: ^4.6.5
+  google_sign_in: ^5.4.2
   image_picker: ^0.8.6
   smooth_page_indicator: ^1.0.0+2
 
@@ -60,6 +61,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/temp_profile.jpg
+    - assets/images/google.svg
+    - assets/images/phone.svg
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

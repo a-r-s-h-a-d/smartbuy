@@ -1,13 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get/get.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
-import 'package:smartbuy/methods/sign_in/sign_in.dart';
+import 'package:smartbuy/authentication/sign_in/sign_in.dart';
 import 'package:smartbuy/presentation/forgot_password/screen_forgot_password.dart';
+import 'package:smartbuy/presentation/login/widgets/signup_button.dart';
 import 'package:smartbuy/presentation/registration/screen_registration.dart';
 import 'package:smartbuy/presentation/widgets/app_logo.dart';
 import 'package:smartbuy/presentation/widgets/custom_text_form_field.dart';
+import 'package:smartbuy/service/auth_service.dart';
 
 class ScreenLogin extends StatelessWidget {
   ScreenLogin({super.key});
@@ -15,6 +18,7 @@ class ScreenLogin extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  AuthClass authClass = AuthClass();
 
   @override
   Widget build(BuildContext context) {
@@ -87,24 +91,21 @@ class ScreenLogin extends StatelessWidget {
                     ),
                   ],
                 ),
-                SignInButton(
-                  Buttons.Google,
-                  onPressed: () {},
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: 65,
-                  ),
-                  text: "Login With Google",
+                SignUpButton(
+                  buttonName: 'Continue with Google',
+                  imagePath: 'assets/images/google.svg',
+                  size: 12,
                 ),
+                // ElevatedButton(
+                //     onPressed: () async {
+                //       await authClass.googleSignIn(context);
+                //     },
+                //     child: const Text('google')),
                 SizedBox(height: height * 0.02),
-                SignInButton(
-                  Buttons.FacebookNew,
-                  onPressed: () {},
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 15,
-                    horizontal: 65,
-                  ),
-                  text: "Login With fb",
+                SignUpButton(
+                  buttonName: 'Continue with Phone ',
+                  imagePath: 'assets/images/phone.svg',
+                  size: 12,
                 ),
                 SizedBox(height: height * 0.02),
                 InkWell(
