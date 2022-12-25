@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:smartbuy/presentation/home/screen_home.dart';
 
 class AuthClass {
   final GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -25,8 +26,19 @@ class AuthClass {
         try {
           UserCredential userCredential =
               await auth.signInWithCredential(credential);
-        } catch (e) {}
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => ScreenHome(),
+              ),
+              (route) => false);
+        } catch (e) {
+          final snackBar = SnackBar(content: Text("Not able to sign in"));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
       }
-    } catch (e) {}
+    } catch (e) {
+      final snackBar = SnackBar(content: Text(e.toString()));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 }
