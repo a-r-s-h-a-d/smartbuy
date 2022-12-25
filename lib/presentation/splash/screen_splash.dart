@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 import 'package:smartbuy/core/colors/colors.dart';
-import 'package:smartbuy/presentation/login/screen_login.dart';
+import 'package:smartbuy/presentation/splash/screen_intermediate.dart';
 import 'package:smartbuy/presentation/widgets/app_logo.dart';
 
 class ScreenSplash extends StatelessWidget {
@@ -11,7 +10,7 @@ class ScreenSplash extends StatelessWidget {
   void initState(BuildContext context) {
     Future.delayed(
       const Duration(seconds: 3),
-      () => Get.off(() => ScreenLogin()),
+      () => Get.off(() => const ScreenIntermediate()),
     );
   }
 

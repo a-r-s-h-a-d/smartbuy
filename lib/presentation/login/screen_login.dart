@@ -3,7 +3,8 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get/get.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
-import 'package:smartbuy/presentation/main_page/screen_mainpage.dart';
+import 'package:smartbuy/methods/sign_in/sign_in.dart';
+import 'package:smartbuy/presentation/forgot_password/screen_forgot_password.dart';
 import 'package:smartbuy/presentation/registration/screen_registration.dart';
 import 'package:smartbuy/presentation/widgets/app_logo.dart';
 import 'package:smartbuy/presentation/widgets/custom_text_form_field.dart';
@@ -12,6 +13,8 @@ class ScreenLogin extends StatelessWidget {
   ScreenLogin({super.key});
 
   final formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +46,8 @@ class ScreenLogin extends StatelessWidget {
                   icon: Icons.email_outlined,
                   label: 'Email ID',
                   keyboardType: TextInputType.emailAddress,
+                  controller: emailController,
                   validator: (value) {
-                    if (value.isEmpty || value == null) {
-                      return "email is required";
-                    }
-                    if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                      return 'Invalid email';
-                    }
                     return null;
                   },
                 ),
@@ -58,13 +56,8 @@ class ScreenLogin extends StatelessWidget {
                   icon: Icons.lock_outline,
                   label: 'Password',
                   keyboardType: TextInputType.visiblePassword,
+                  controller: passwordController,
                   validator: (value) {
-                    var passNonNullValue = value ?? "";
-                    if (passNonNullValue.isEmpty) {
-                      return ("Password is required");
-                    } else if (passNonNullValue.length < 6) {
-                      return ("Password Must be more than 5 characters");
-                    }
                     return null;
                   },
                 ),
@@ -73,12 +66,8 @@ class ScreenLogin extends StatelessWidget {
                   height: height * 0.07,
                   width: width * 0.9,
                   child: ElevatedButton(
-                    onPressed: () {
-                      // if (formKey.currentState!.validate()) {
-                      //   Get.offAll(() => ScreenMainPage());
-                      // }
-                      Get.offAll(() => ScreenMainPage());
-                    },
+                    onPressed: () =>
+                        signIn(context, emailController, passwordController),
                     child: boldTextStyle(13, kWhiteColor, 'Sign In'),
                   ),
                 ),
@@ -118,14 +107,17 @@ class ScreenLogin extends StatelessWidget {
                   text: "Login With fb",
                 ),
                 SizedBox(height: height * 0.02),
-                regularTextStyle(12, kSilver, "Forgot Password?")!,
+                InkWell(
+                  onTap: () => Get.to(() => ScreenForgotPassword()),
+                  child: regularTextStyle(12, kSilver, "Forgot Password?")!,
+                ),
                 SizedBox(height: height * 0.02),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     regularTextStyle(12, kSilver, "Don't have an Account?")!,
                     GestureDetector(
-                      child: boldTextStyle(14, kBlueColor, '\tRegister')!,
+                      child: boldTextStyle(14, kBlueColor, '\tSign Up')!,
                       onTap: () {
                         Get.to(() => ScreenRegistration());
                       },

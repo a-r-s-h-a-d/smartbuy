@@ -1,10 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:smartbuy/core/colors/colors.dart';
 import 'package:smartbuy/core/constants.dart';
 import 'package:smartbuy/presentation/account/widgets/account_tile.dart';
 import 'package:smartbuy/presentation/address/screen_address.dart';
-import 'package:smartbuy/presentation/login/screen_login.dart';
 import 'package:smartbuy/presentation/order/screen_order.dart';
 import 'package:smartbuy/presentation/payment/screen_payment.dart';
 import 'package:smartbuy/presentation/profile/screen_profile.dart';
@@ -27,7 +26,7 @@ class ScreenAccount extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 10.0),
                 child: IconButton(
-                  onPressed: () => Get.offAll(() => ScreenLogin()),
+                  onPressed: () => FirebaseAuth.instance.signOut(),
                   icon: const Icon(Icons.exit_to_app),
                   color: kDarkColor,
                   iconSize: 30,
