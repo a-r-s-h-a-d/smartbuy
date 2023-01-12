@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/utils/constants.dart';
-import 'package:smartbuy/services/functions/forgot_password.dart';
+import 'package:smartbuy/services/functions/reset_password/forgot_password.dart';
 import 'package:smartbuy/pages/widgets/custom_text_form_field.dart';
 import 'package:smartbuy/utils/styles.dart';
 

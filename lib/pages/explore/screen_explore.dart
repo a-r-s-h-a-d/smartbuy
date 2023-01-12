@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartbuy/pages/screen_products_and_wishlist/screen_products_and_wishlist.dart';
 import 'package:smartbuy/pages/widgets/brandcircle.dart';
-import 'package:smartbuy/services/functions/firebase_functions.dart';
+import 'package:smartbuy/services/functions/product/list_product.dart';
 import 'package:smartbuy/services/models/brand/brand.dart';
 import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/utils/constants.dart';

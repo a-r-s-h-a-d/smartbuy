@@ -1,157 +1,73 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:smartbuy/services/provider/cart_controller.dart';
+import 'package:lottie/lottie.dart';
+import 'package:smartbuy/pages/cart/widgets/build_product.dart';
+import 'package:smartbuy/services/functions/cart/fetch_from_cart.dart';
+import 'package:smartbuy/services/models/cart/model_cart.dart';
 import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/utils/constants.dart';
-import 'package:smartbuy/pages/cart/widgets/texticonbutton.dart';
 import 'package:smartbuy/utils/styles.dart';
 
 class CartProduct extends StatelessWidget {
+  final double height;
+  final double width;
   const CartProduct({
     Key? key,
     required this.height,
     required this.width,
-    required this.cart,
   }) : super(key: key);
-
-  final double height;
-  final double width;
-  final CartController cart;
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      shrinkWrap: true,
-      physics: const ScrollPhysics(),
-      separatorBuilder: (context, index) => kheight20,
-      itemCount: 10,
-      itemBuilder: (context, index) => Column(
-        children: [
-          Container(
-            height: 200,
-            decoration: BoxDecoration(
-              border: Border.all(
-                width: 0.15,
-                color: ksilverOriginal,
+    return StreamBuilder(
+      stream: fetchDatafromCart(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          log(snapshot.error.toString());
+          return Center(
+            child: regularTextStyle(15, kDarkColor, 'Something went wrong', 1),
+          );
+        } else if (snapshot.hasData) {
+          final cartList = snapshot.data!;
+
+          if (cartList.isEmpty) {
+            return Center(
+              child: Lottie.asset(
+                'assets/animation/empty_cart.json',
+                fit: BoxFit.cover,
               ),
-              borderRadius: kBradius10,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.transparent,
-                          ),
-                          color: kWhiteColor,
+            );
+          } else {
+            return Column(
+              children: [
+                ListView.builder(
+                    shrinkWrap: true,
+                    physics: const ScrollPhysics(),
+                    itemCount: cartList.length,
+                    itemBuilder: (context, index) {
+                      final cart = cartList[index];
+                      return BuildCart(
+                        cart: ModelCart(
+                          productname: cart.productname,
+                          productimage: cart.productimage,
+                          price: cart.price,
+                          size: cart.size,
+                          quantity: cart.quantity,
                         ),
-                        height: height * 0.065,
-                        width: width * 0.25,
-                        child: ClipRect(
-                          child: CachedNetworkImage(
-                            imageUrl:
-                                "https://freepngimg.com/thumb/shoes/28090-6-sneaker-file.png",
-                            placeholder: (context, url) =>
-                                const CircularProgressIndicator(),
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
-                          ),
-                        ),
-                      ),
-                      kwidth20,
-                      SizedBox(
-                        width: 200,
-                        child: Text(
-                          'Product ${index + 1}',
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: kWhiteColor,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: kSilver,
-                              blurRadius: 5,
-                              spreadRadius: 1,
-                            ),
-                          ],
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-                            cart.productDecrement();
-                          },
-                          icon: const Icon(Icons.remove),
-                        ),
-                      ),
-                      SizedBox(width: width * 0.05),
-                      GetBuilder<CartController>(
-                        builder: (_) => boldTextStyle(
-                            16, kDarkColor, cart.count.toString())!,
-                      ),
-                      SizedBox(width: width * 0.05),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: kWhiteColor,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: kSilver,
-                              blurRadius: 5,
-                              spreadRadius: 1,
-                            ),
-                          ],
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-                            cart.productIncrement();
-                          },
-                          icon: const Icon(Icons.add),
-                        ),
-                      ),
-                      const Spacer(),
-                      GetBuilder<CartController>(
-                        builder: (_) =>
-                            boldTextStyle(14, kDarkColor, '₹${cart.price}')!,
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      TextIconButton(
-                        icon: Icons.archive_outlined,
-                        label: 'Save for later',
-                      ),
-                      TextIconButton(
-                        icon: Icons.delete,
-                        label: 'Remove',
-                      ),
-                      TextIconButton(
-                        icon: Icons.flash_on,
-                        label: 'Buy this now',
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
+                        index: index,
+                        cartList: cartList,
+                      );
+                    }),
+                kheight20,
+              ],
+            );
+          }
+        }
+
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smartbuy/utils/colors.dart';
-import 'package:smartbuy/services/functions/auth_service.dart';
+import 'package:smartbuy/services/functions/auth_service/auth_service.dart';
 import 'package:smartbuy/utils/styles.dart';
 
 class SignUpButton extends StatelessWidget {

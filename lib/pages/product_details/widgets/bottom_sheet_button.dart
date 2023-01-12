@@ -1,13 +1,17 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:smartbuy/pages/address/screen_address.dart';
-import 'package:smartbuy/pages/tabs/main_page/widgets/bottom_nav.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:smartbuy/services/functions/cart/add_to_cart.dart';
 import 'package:smartbuy/utils/styles.dart';
 
 class BottomSheetButton extends StatelessWidget {
   final String label;
   final Color buttoncolor;
   final Color labelcolor;
+  final String? productname;
+  final String? productimage;
+  final String? price;
+  final String? size;
 
   const BottomSheetButton({
     required this.label,
@@ -16,6 +20,10 @@ class BottomSheetButton extends StatelessWidget {
     Key? key,
     required this.height,
     required this.width,
+    this.productname,
+    this.productimage,
+    this.price,
+    this.size,
   }) : super(key: key);
 
   final double height;
@@ -30,12 +38,25 @@ class BottomSheetButton extends StatelessWidget {
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(buttoncolor),
         ),
-        onPressed: () {
+        onPressed: () async {
           if (label == 'Add to Cart') {
-            Get.back();
-            indexChangeNotifier.value = 2;
-          } else {
-            Get.to(() => const ScreenAddress(screenname: 'Ship To'));
+            try {
+              await addtoCart(
+                productName: productname!,
+                productImage: productimage!,
+                price: price!,
+                productSize: size!,
+              );
+              Fluttertoast.showToast(
+                msg: "Succesfully added to the cart",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                fontSize: 18.0,
+              );
+            } catch (e) {
+              log(e.toString());
+            }
           }
         },
         child: boldTextStyle(13, labelcolor, label),

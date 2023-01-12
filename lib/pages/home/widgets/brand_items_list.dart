@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartbuy/pages/home/widgets/heading.dart';
 import 'package:smartbuy/pages/home/widgets/product_structure.dart';
 import 'package:smartbuy/pages/product_details/screen_product_details.dart';
-import 'package:smartbuy/services/functions/firebase_functions.dart';
+import 'package:smartbuy/services/functions/product/list_product.dart';
 import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/utils/styles.dart';
-// import 'package:get/get.dart';
-// import 'package:smartbuy/utils/constants.dart';
-// import 'package:smartbuy/pages/home/widgets/heading.dart';
-// import 'package:smartbuy/pages/home/widgets/product_structure.dart';
-// import 'package:smartbuy/pages/product_details/screen_product_details.dart';
 
 class BrandItemsList extends StatelessWidget {
   const BrandItemsList({
@@ -24,63 +18,56 @@ class BrandItemsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: StreamBuilder(
-        stream: listProducts(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
+    return StreamBuilder(
+      stream: listProducts(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Center(
+            child: regularTextStyle(15, kDarkColor, 'Something went wrong', 1),
+          );
+        } else if (snapshot.hasData) {
+          final products = snapshot.data;
+          if (products!.isEmpty) {
             return Center(
-              child:
-                  regularTextStyle(15, kDarkColor, 'Something went wrong', 1),
+              child: regularTextStyle(15, kDarkColor, 'Add Some Products', 1),
             );
-          } else if (snapshot.hasData) {
-            final products = snapshot.data;
-            if (products!.isEmpty) {
-              return Center(
-                child: regularTextStyle(15, kDarkColor, 'Add Some Products', 1),
-              );
-            } else {
-              return SizedBox(
-                height: height,
-                width: width,
-                child: GridView(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: const ScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.57,
-                      crossAxisSpacing: 15,
-                      mainAxisSpacing: 10),
-                  children: products
-                      .map(
-                        (products) => InkWell(
-                          onTap: () {
-                            Get.to(() => ScreenProductDetails(
-                                  productname: products.productname,
-                                  price: products.price,
-                                  size: products.size,
-                                  productimages: products.productimages,
-                                  description: products.description,
-                                ));
-                          },
-                          child: ProductStructure(
-                              screenname: products.productname,
-                              price: products.price,
-                              productImage: products.productimages[0],
+          } else {
+            return GridView(
+              // scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              physics: const ScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.57,
+                  crossAxisSpacing: 15,
+                  mainAxisSpacing: 10),
+              children: products
+                  .map(
+                    (products) => InkWell(
+                      onTap: () {
+                        Get.to(() => ScreenProductDetails(
                               productname: products.productname,
-                              height: height,
-                              width: width),
-                        ),
-                      )
-                      .toList(),
-                ),
-              );
-            }
+                              price: products.price,
+                              size: products.size,
+                              productimages: products.productimages,
+                              description: products.description,
+                            ));
+                      },
+                      child: ProductStructure(
+                          screenname: products.productname,
+                          price: products.price,
+                          productImage: products.productimages[0],
+                          productname: products.productname,
+                          height: height,
+                          width: width),
+                    ),
+                  )
+                  .toList(),
+            );
           }
-          return const Center(child: CircularProgressIndicator());
-        },
-      ),
+        }
+        return const Center(child: CircularProgressIndicator());
+      },
     );
   }
 }

@@ -27,6 +27,7 @@ class AuthClass {
         try {
           UserCredential userCredential =
               await auth.signInWithCredential(credential);
+
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
                 builder: (context) => ScreenMainPage(),

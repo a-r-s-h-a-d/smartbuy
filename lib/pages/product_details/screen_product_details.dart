@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:smartbuy/pages/product_details/widgets/size_button.dart';
 import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/utils/constants.dart';
 import 'package:smartbuy/pages/product_details/widgets/bottom_sheet_button.dart';
@@ -11,7 +10,7 @@ import 'package:smartbuy/pages/review/screen_review.dart';
 import 'package:smartbuy/pages/review/widgets/review_model.dart';
 import 'package:smartbuy/utils/styles.dart';
 
-class ScreenProductDetails extends StatelessWidget {
+class ScreenProductDetails extends StatefulWidget {
   final String productname;
   final String price;
   final List<dynamic> size;
@@ -27,6 +26,12 @@ class ScreenProductDetails extends StatelessWidget {
   });
 
   @override
+  State<ScreenProductDetails> createState() => _ScreenProductDetailsState();
+}
+
+class _ScreenProductDetailsState extends State<ScreenProductDetails> {
+  int selectedIndex = 0;
+  @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
@@ -37,7 +42,7 @@ class ScreenProductDetails extends StatelessWidget {
           iconTheme: const IconThemeData(color: Colors.black),
           backgroundColor: Colors.transparent,
           elevation: 0,
-          title: boldTextStyle(15, kDarkColor, productname),
+          title: boldTextStyle(15, kDarkColor, widget.productname),
         ),
       ),
       body: ListView(
@@ -53,7 +58,7 @@ class ScreenProductDetails extends StatelessWidget {
               SizedBox(
                 height: height * 0.35,
                 width: double.infinity,
-                child: Carousel(imgList: productimages),
+                child: Carousel(imgList: widget.productimages),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -66,7 +71,7 @@ class ScreenProductDetails extends StatelessWidget {
                         SizedBox(
                           width: width * 0.71,
                           child: Text(
-                            productname,
+                            widget.productname,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
@@ -92,46 +97,26 @@ class ScreenProductDetails extends StatelessWidget {
                     //   ),
                     //   onRatingUpdate: (rating) {},
                     // ),
-                    boldTextStyle(16, kBlueColor, '₹ $price')!,
+                    boldTextStyle(16, kBlueColor, '₹ ${widget.price}')!,
                     kheight20,
                     boldTextStyle(14, kDarkColor, 'Select Size')!,
                     kheight20,
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Wrap(
-                          children: List.generate(
-                            size.length,
-                            (index) {
-                              return Container(
-                                margin: const EdgeInsets.only(right: 20),
-                                child: SizeButton(
-                                  textColor: kWhiteColor,
-                                  backgroundColor: kBlackColor,
-                                  borderColor: kBlackColor,
-                                  text: size[index],
-                                  size: 40,
-                                ),
-                              );
-                            },
-                          ),
-                        )
-                      ],
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: List.generate(
+                        widget.size.length,
+                        (index) {
+                          return sizeButton(index);
+                        },
+                      ),
                     ),
                     kheight50,
                     boldTextStyle(15, kDarkColor, 'Product Description')!,
                     kheight20,
-                    regularTextStyle(12, kBlackColor, description, 8)!,
+                    regularTextStyle(12, kBlackColor, widget.description, 8)!,
 
                     //Display Reviews
 
-                    // ListTile(
-                    //   leading: boldTextStyle(15, kDarkColor, 'Review Product'),
-                    //   trailing: GestureDetector(
-                    //     onTap: () => Get.to(() => const ScreenReview()),
-                    //     child: boldTextStyle(14, kBlueColor, 'See More'),
-                    //   ),
-                    // ),
                     kheight50,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -167,7 +152,7 @@ class ScreenProductDetails extends StatelessWidget {
               width: width * 0.4,
               buttoncolor: kWhiteColor,
               labelcolor: kBlueColor,
-              label: 'Add to Cart',
+              label: 'Wishlist',
             ),
             kwidth20,
             BottomSheetButton(
@@ -175,9 +160,44 @@ class ScreenProductDetails extends StatelessWidget {
               width: width * 0.4,
               buttoncolor: kBlueColor,
               labelcolor: kWhiteColor,
-              label: 'Buy now',
+              label: 'Add to Cart',
+              productname: widget.productname,
+              productimage: widget.productimages[0],
+              price: widget.price,
+              size: widget.size[selectedIndex],
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget sizeButton(int index) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedIndex = index;
+        });
+      },
+      child: Container(
+        margin: const EdgeInsets.only(right: 10),
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          color: selectedIndex == index ? kBlackColor : kWhiteColor,
+          borderRadius: kBradius15,
+          border: Border.all(
+            color: ksilverOriginal,
+            width: 1.0,
+          ),
+        ),
+        child: Center(
+          child: regularTextStyle(
+            10,
+            selectedIndex == index ? kWhiteColor : kBlackColor,
+            widget.size[index],
+            1,
+          ),
         ),
       ),
     );

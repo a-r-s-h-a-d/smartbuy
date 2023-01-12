@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:smartbuy/main.dart';
@@ -23,6 +24,10 @@ Future signUp(
     await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim());
+    FirebaseFirestore.instance
+        .collection('user')
+        .doc(emailController.text)
+        .set({'id': emailController.text});
   } on FirebaseAuthException catch (e) {
     final snackbar = SnackBar(content: Text(e.toString()));
     ScaffoldMessenger.of(context).showSnackBar(snackbar);

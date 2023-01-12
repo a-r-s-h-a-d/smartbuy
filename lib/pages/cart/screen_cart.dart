@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:smartbuy/services/provider/cart_controller.dart';
+import 'package:lottie/lottie.dart';
+import 'package:smartbuy/pages/cart/widgets/cart_product_details.dart';
+import 'package:smartbuy/services/functions/cart/fetch_from_cart.dart';
 import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/utils/constants.dart';
-import 'package:smartbuy/pages/cart/widgets/cart_product_details.dart';
 import 'package:smartbuy/pages/cart/widgets/cart_products.dart';
 import 'package:smartbuy/utils/styles.dart';
 
@@ -14,7 +14,8 @@ class ScreenCart extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    CartController cart = Get.put(CartController());
+    int totalamount = 0;
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(height * 0.1),
@@ -30,16 +31,48 @@ class ScreenCart extends StatelessWidget {
       ),
       body: Padding(
         padding:
-            const EdgeInsets.only(left: 20.0, right: 20, top: 20, bottom: 5),
+            const EdgeInsets.only(left: 8.0, right: 8.0, top: 20, bottom: 20),
         child: ListView(
           children: [
             /* to list cart products */
-            CartProduct(height: height, width: width, cart: cart),
+            CartProduct(
+              height: height,
+              width: width,
+              // cartController: cartCtrl,
+            ),
             kheight20,
             /* products details & place order  */
-            CartProductDetails(height: height),
           ],
         ),
+      ),
+      bottomSheet: StreamBuilder(
+        stream: fetchDatafromCart(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final cartList = snapshot.data;
+            if (cartList!.isEmpty) {
+              return Container();
+            } else {
+              totalamount = 0;
+              for (var cart in cartList) {
+                final nitemprice = int.parse(cart.price) * cart.quantity;
+                totalamount += nitemprice;
+              }
+
+              return CartProductDetails(
+                height: height,
+                totalamount: totalamount,
+              );
+            }
+          }
+          return Center(
+            child: Lottie.asset(
+              'assets/animation/empty_cart.json',
+              fit: BoxFit.cover,
+              repeat: true,
+            ),
+          );
+        },
       ),
     );
   }

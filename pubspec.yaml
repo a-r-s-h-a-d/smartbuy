@@ -38,9 +38,14 @@ dependencies:
     sdk: flutter
   flutter_rating_bar: ^4.0.1
   flutter_svg: ^1.1.6
+  fluttertoast: ^8.1.2
   get: ^4.6.5
   google_sign_in: ^5.4.2
   image_picker: ^0.8.6
+  intl: null
+  lottie: ^2.1.0
+  quickalert: ^1.0.1
+  slide_to_act: ^2.0.1
   smooth_page_indicator: ^1.0.0+2
 
 dev_dependencies:
@@ -60,9 +65,11 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/temp_profile.jpg
-    - assets/icons/ic_google.svg
-    - assets/icons/ic_phone.svg
+    # - assets/images/temp_profile.jpg
+    # - assets/icons/ic_google.svg
+    # - assets/icons/ic_phone.svg
+    - assets/
+    - assets/animation/empty_cart.json
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smartbuy/services/functions/auth_service.dart';
+import 'package:smartbuy/services/functions/auth_service/auth_service.dart';
 import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/pages/account/widgets/account_tile.dart';
 import 'package:smartbuy/pages/address/screen_address.dart';

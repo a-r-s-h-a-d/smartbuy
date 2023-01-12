@@ -15,27 +15,27 @@ class PopularBrands extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: SizedBox(
-        height: height * .13,
-        child: StreamBuilder(
-          stream: listBrands(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final brands = snapshot.data;
+    return SizedBox(
+      height: height * .13,
+      child: StreamBuilder(
+        stream: listBrands(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final brands = snapshot.data;
 
-              return ListView(
-                itemExtent: 90,
-                scrollDirection: Axis.horizontal,
-                children: brands!.map(buildBrands).toList(),
-              );
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
-        ),
+            return ListView(
+              shrinkWrap: true,
+              physics: const ScrollPhysics(),
+              itemExtent: 90,
+              scrollDirection: Axis.horizontal,
+              children: brands!.map(buildBrands).toList(),
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }

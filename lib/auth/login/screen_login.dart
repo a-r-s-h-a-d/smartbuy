@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartbuy/utils/colors.dart';
-import 'package:smartbuy/services/functions/sign_in.dart';
+import 'package:smartbuy/services/functions/sign_in/sign_in.dart';
 import 'package:smartbuy/auth/forgot_password/screen_forgot_password.dart';
 import 'package:smartbuy/auth/login/widgets/signup_button.dart';
 import 'package:smartbuy/auth/registration/screen_registration.dart';
 import 'package:smartbuy/pages/widgets/app_logo.dart';
 import 'package:smartbuy/pages/widgets/custom_text_form_field.dart';
-import 'package:smartbuy/services/functions/auth_service.dart';
+import 'package:smartbuy/services/functions/auth_service/auth_service.dart';
 import 'package:smartbuy/utils/images.dart';
 import 'package:smartbuy/utils/styles.dart';
 

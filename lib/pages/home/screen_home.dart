@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:smartbuy/utils/constants.dart';
 import 'package:smartbuy/pages/home/widgets/brand_items_list.dart';
@@ -12,14 +14,19 @@ class ScreenHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userEmail = FirebaseAuth.instance.currentUser!.email;
+    FirebaseFirestore.instance
+        .collection('user')
+        .doc(userEmail)
+        .set({'id': userEmail});
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
         child: ListView(
-          shrinkWrap: true,
-          physics: const ScrollPhysics(),
-          scrollDirection: Axis.vertical,
+          // shrinkWrap: true,
+          // physics: const ScrollPhysics(),
+          // scrollDirection: Axis.vertical,
           children: [
             Column(
               children: [

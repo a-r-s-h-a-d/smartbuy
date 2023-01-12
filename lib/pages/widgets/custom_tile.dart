@@ -14,9 +14,22 @@ class CustomTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: regularTextStyle(12, ksilverOriginal, title, 1),
-      trailing: regularTextStyle(12, kBlackColor, trailing, 1),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              boldTextStyle(13, kDarkColor, title)!,
+              boldTextStyle(12, kBlackColor, trailing)!,
+            ],
+          ),
+        ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.01,
+        )
+      ],
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:smartbuy/utils/colors.dart';
 
 TextStyle klogoStyle1 = const TextStyle(
@@ -37,7 +38,19 @@ Widget? regularTextStyle(double size, Color color, String text, int maxlines) {
 Widget? boldTextStyle(double size, Color color, String text) {
   return Text(
     text,
-    // maxLines: 2,
+    style: TextStyle(
+      fontFamily: 'Poppins bold',
+      fontSize: size,
+      fontWeight: FontWeight.bold,
+      color: color,
+    ),
+  );
+}
+
+Widget? currency(double size, Color color, int number) {
+  return Text(
+    NumberFormat.simpleCurrency(locale: 'hi-IN', decimalDigits: 2)
+        .format(number),
     style: TextStyle(
       fontFamily: 'Poppins bold',
       fontSize: size,

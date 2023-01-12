@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smartbuy/pages/widgets/productbrandwisecontent.dart';
-import 'package:smartbuy/services/functions/firebase_functions.dart';
+import 'package:smartbuy/services/functions/product/list_product.dart';
 import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/utils/styles.dart';
 
