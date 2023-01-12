@@ -51,27 +51,26 @@ class ScreenCart extends StatelessWidget {
           if (snapshot.hasData) {
             final cartList = snapshot.data;
             if (cartList!.isEmpty) {
-              return Container();
+              return Center(
+                child: Lottie.asset(
+                  'assets/animation/empty_cart.json',
+                  fit: BoxFit.cover,
+                  repeat: true,
+                ),
+              );
             } else {
               totalamount = 0;
               for (var cart in cartList) {
                 final nitemprice = int.parse(cart.price) * cart.quantity;
                 totalamount += nitemprice;
               }
-
               return CartProductDetails(
                 height: height,
                 totalamount: totalamount,
               );
             }
           }
-          return Center(
-            child: Lottie.asset(
-              'assets/animation/empty_cart.json',
-              fit: BoxFit.cover,
-              repeat: true,
-            ),
-          );
+          return Container();
         },
       ),
     );
