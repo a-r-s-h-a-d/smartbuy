@@ -24,9 +24,6 @@ class ScreenHome extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: ListView(
-          // shrinkWrap: true,
-          // physics: const ScrollPhysics(),
-          // scrollDirection: Axis.vertical,
           children: [
             Column(
               children: [

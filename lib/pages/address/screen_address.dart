@@ -1,22 +1,27 @@
+// ignore_for_file: must_be_immutable
+
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
+import 'package:smartbuy/services/functions/address/list_address.dart';
+import 'package:smartbuy/services/models/address/model_address.dart';
+import 'package:smartbuy/services/provider/address_controller.dart';
 import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/utils/constants.dart';
 import 'package:smartbuy/pages/add_address/add_address.dart';
-import 'package:smartbuy/pages/payment/screen_payment.dart';
 import 'package:smartbuy/utils/styles.dart';
 
 class ScreenAddress extends StatelessWidget {
-  final String screenname;
-  const ScreenAddress({
-    required this.screenname,
-    super.key,
-  });
+  ScreenAddress({super.key});
+
+  final AddressController controller = Get.put(AddressController());
+  List<ModelAddress>? addressList;
 
   @override
   Widget build(BuildContext context) {
+    ModelAddress address;
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(height * 0.1),
@@ -25,111 +30,113 @@ class ScreenAddress extends StatelessWidget {
           backgroundColor: Colors.transparent,
           elevation: 0,
           actions: [
-            screenname == 'Ship To'
-                ? IconButton(
-                    onPressed: () {
-                      Get.to(() => const ScreenAddAddress());
-                    },
-                    icon: const Icon(Icons.add))
-                : const SizedBox(),
+            Padding(
+              padding: const EdgeInsets.only(right: 15.0),
+              child: IconButton(
+                icon: const Icon(Icons.add),
+                iconSize: 30,
+                onPressed: () => Get.to(() => ScreenAddAddress()),
+              ),
+            ),
           ],
-          title: boldTextStyle(15, kDarkColor, screenname),
+          title: boldTextStyle(15, kDarkColor, 'Address'),
         ),
       ),
-      body: ListView.separated(
-          itemBuilder: (context, index) => Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Container(
-                  height: height * 0.25,
-                  decoration: BoxDecoration(
-                      border: Border.all(),
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        boldTextStyle(14, kDarkColor, 'Name')!,
-                        regularTextStyle(
-                            12, const Color(0xFF08415C), 'Address', 1)!,
-                        regularTextStyle(
-                            12, const Color(0xFF08415C), 'mobile', 1)!,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            SizedBox(
-                              height: height * 0.05,
-                              width: width * 0.3,
-                              child: TextButton(
-                                onPressed: () {},
-                                child: boldTextStyle(13, kBlueColor, 'Edit')!,
-                              ),
-                            ),
-                            SizedBox(
-                              height: height * 0.05,
-                              width: width * 0.3,
-                              child: TextButton(
-                                onPressed: () {
-                                  Get.defaultDialog(
-                                    radius: 10.0,
-                                    contentPadding: const EdgeInsets.all(20.0),
-                                    title: 'Remove',
-                                    middleText:
-                                        'Are you sure , You want to remove!',
-                                    textConfirm: 'Okay',
-                                    confirm: OutlinedButton.icon(
-                                      onPressed: () => Get.back(),
-                                      icon: const Icon(
-                                        Icons.check,
-                                        color: Colors.blue,
-                                      ),
-                                      label: const Text(
-                                        'Okay',
-                                        style: TextStyle(color: Colors.blue),
-                                      ),
-                                    ),
-                                    cancel: OutlinedButton.icon(
-                                      onPressed: () {
-                                        Get.back();
-                                      },
-                                      icon: const Icon(Icons.close),
-                                      label: const Text('No'),
-                                    ),
-                                  );
-                                },
-                                child: boldTextStyle(
-                                    13, const Color(0xFFEE4B2B), 'Remove')!,
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
+      body: StreamBuilder(
+        stream: readAddress(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: boldTextStyle(14, kDarkColor, 'Something went wrong'),
+            );
+          } else if (snapshot.hasData) {
+            addressList = snapshot.data;
+            if (addressList!.isEmpty) {
+              Center(
+                child: boldTextStyle(14, kDarkColor, 'Add an Address'),
+              );
+            } else {
+              return ListView(
+                children: [
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const ScrollPhysics(),
+                    itemCount: addressList!.length,
+                    itemBuilder: (context, index) {
+                      address = addressList![index];
+                      return BuildAddress(
+                        address: address,
+                        index: index,
+                      );
+                    },
                   ),
+                ],
+              );
+            }
+          }
+          return const Center(child: CircularProgressIndicator());
+        },
+      ),
+      bottomSheet: Container(
+          color: kBlueColor,
+          height: height * 0.06,
+          width: double.infinity,
+          child: TextButton(
+              onPressed: () {
+                final addressindex = controller.groupValue;
+                log(addressList![addressindex].fullname.toString());
+                Navigator.pop(context, addressList![addressindex]);
+              },
+              child: regularTextStyle(12, kWhiteColor, 'Deliver Here', 1)!)),
+    );
+  }
+}
+
+class BuildAddress extends StatelessWidget {
+  final ModelAddress? address;
+  final int index;
+  const BuildAddress({
+    super.key,
+    required this.address,
+    required this.index,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        kheight10,
+        GetBuilder<AddressController>(
+          builder: (controller) {
+            return RadioListTile(
+              title: boldTextStyle(15, kDarkColor, address!.fullname),
+              subtitle: regularTextStyle(
+                  13,
+                  kDarkColor,
+                  '${address!.housenoorbuildingname},${address!.roadareacolony},\n${address!.city},${address!.state}-${address!.pincode}\n${address!.phoneNumber}',
+                  4),
+              secondary: Padding(
+                padding: const EdgeInsets.only(top: 18.0),
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.edit_location,
+                    color: kBlueColor,
+                    size: 40,
+                  ),
+                  onPressed: () {},
                 ),
               ),
-          separatorBuilder: (context, index) => kheight10,
-          itemCount: 2),
-      bottomSheet: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: SizedBox(
-          height: height * 0.07,
-          width: width * 0.9,
-          child: ElevatedButton(
-            onPressed: () {
-              screenname == 'Address'
-                  ? Get.to(() => const ScreenAddAddress())
-                  : Get.to(() => const ScreenPayment());
-            },
-            child: boldTextStyle(
-              13,
-              kWhiteColor,
-              screenname == 'Ship To' ? 'Next' : 'Add Address',
-            ),
-          ),
-        ),
-      ),
+              value: index,
+              groupValue: controller.groupValue,
+              onChanged: (value) {
+                controller.setAddress(value);
+                box.write('curaddress', controller.groupValue);
+                controller.changeAddressonCheckout(address);
+              },
+            );
+          },
+        )
+      ],
     );
   }
 }

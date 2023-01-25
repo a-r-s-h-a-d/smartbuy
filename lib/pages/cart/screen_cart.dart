@@ -38,7 +38,6 @@ class ScreenCart extends StatelessWidget {
             CartProduct(
               height: height,
               width: width,
-              // cartController: cartCtrl,
             ),
             kheight20,
             /* products details & place order  */
@@ -64,9 +63,13 @@ class ScreenCart extends StatelessWidget {
                 final nitemprice = int.parse(cart.price) * cart.quantity;
                 totalamount += nitemprice;
               }
-              return CartProductDetails(
-                height: height,
-                totalamount: totalamount,
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: CartProductDetails(
+                  height: height,
+                  totalamount: totalamount,
+                  cartList: cartList,
+                ),
               );
             }
           }

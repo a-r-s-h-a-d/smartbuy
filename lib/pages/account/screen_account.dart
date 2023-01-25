@@ -48,10 +48,10 @@ class ScreenAccount extends StatelessWidget {
               title: 'Order',
               route: ScreenOrder(),
             ),
-            const AccountTile(
+            AccountTile(
               icon: Icons.location_on_outlined,
               title: 'Address',
-              route: ScreenAddress(screenname: 'Address'),
+              route: ScreenAddress(),
             ),
             const AccountTile(
               icon: Icons.payment,

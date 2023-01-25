@@ -39,8 +39,8 @@ class BrandItemsList extends StatelessWidget {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 0.57,
-                  crossAxisSpacing: 15,
-                  mainAxisSpacing: 10),
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 0),
               children: products
                   .map(
                     (products) => InkWell(

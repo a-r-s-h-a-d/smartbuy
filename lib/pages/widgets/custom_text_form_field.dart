@@ -29,7 +29,7 @@ class CustomTextFormField extends StatelessWidget {
               ),
         isDense: true,
         labelText: label,
-        labelStyle: const TextStyle(color: kSilver, fontSize: 12),
+        labelStyle: const TextStyle(color: kSilver, fontSize: 10),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),

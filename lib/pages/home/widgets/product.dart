@@ -26,20 +26,20 @@ class Product extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: kSilver,
+        color: kWhiteColor,
         borderRadius: kBradius10,
       ),
-      height: height * 0.32,
-      width: width * 0.4,
+      height: height * 0.269,
+      width: width * 0.45,
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(top: 8.0),
             child: Image.network(
               fit: BoxFit.fill,
               productImage,
-              width: width * 0.35,
-              height: height * 0.2,
+              width: width * 0.42,
+              height: height * 0.15,
             ),
           ),
           Padding(

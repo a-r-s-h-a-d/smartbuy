@@ -129,10 +129,7 @@ class _ScreenProductDetailsState extends State<ScreenProductDetails> {
                       ],
                     ),
                     kheight30,
-                    SizedBox(
-                      height: height * 0.4,
-                      child: const ReviewModel(itemCount: 1),
-                    ),
+                    const ReviewModel(itemCount: 1),
                   ],
                 ),
               )

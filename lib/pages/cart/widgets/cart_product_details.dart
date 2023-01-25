@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smartbuy/pages/checkout/screen_checkout.dart';
+import 'package:smartbuy/services/models/cart/model_cart.dart';
 import 'package:smartbuy/utils/colors.dart';
-import 'package:smartbuy/pages/address/screen_address.dart';
 import 'package:smartbuy/utils/styles.dart';
 
 class CartProductDetails extends StatelessWidget {
   final double height;
   final int totalamount;
+  final List<ModelCart>? cartList;
   const CartProductDetails({
     Key? key,
     required this.height,
     required this.totalamount,
+    required this.cartList,
   }) : super(key: key);
 
   @override
@@ -28,10 +31,13 @@ class CartProductDetails extends StatelessWidget {
           children: [
             currency(14, kDarkColor, totalamount)!,
             SizedBox(
-              height: height * .06,
+              height: height * .05,
               child: ElevatedButton(
                 onPressed: () {
-                  Get.to(() => const ScreenAddress(screenname: 'Ship To'));
+                  Get.to(() => ScreenCheckout(
+                        totalamount: totalamount,
+                        cartList: cartList,
+                      ));
                 },
                 child: boldTextStyle(14, kWhiteColor, 'Place Order'),
               ),

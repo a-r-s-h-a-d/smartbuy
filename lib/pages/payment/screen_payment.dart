@@ -33,13 +33,11 @@ class ScreenPayment extends StatelessWidget {
           paymentMethod(
             title: "Razorpay",
             value: 0,
-            //onChanged: (value) => setState(() => groupValue = value),
             onChanged: (value) {},
           ),
           paymentMethod(
             title: "Cash on Delivery",
             value: 1,
-            // onChanged: (value) => setState(() => groupValue = value),
             onChanged: (value) {},
           ),
         ],
