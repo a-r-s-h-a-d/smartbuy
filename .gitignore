@@ -45,3 +45,6 @@ app.*.map.json
 
 # Controllers
 lib/controllers
+
+# razorpay api_key
+lib/utils/api_key.dart

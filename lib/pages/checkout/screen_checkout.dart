@@ -1,7 +1,4 @@
 // ignore_for_file: must_be_immutable
-
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +6,7 @@ import 'package:smartbuy/pages/address/screen_address.dart';
 import 'package:smartbuy/pages/payment/screen_payment.dart';
 import 'package:smartbuy/services/models/address/model_address.dart';
 import 'package:smartbuy/services/models/cart/model_cart.dart';
-import 'package:smartbuy/services/provider/address_controller.dart';
+import 'package:smartbuy/services/controller/address_controller.dart';
 import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/utils/constants.dart';
 import 'package:smartbuy/utils/styles.dart';
@@ -251,26 +248,34 @@ class ScreenCheckout extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 15.0,
-                vertical: 15.0,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  boldTextStyle(16, kDarkColor, 'Price Details')!,
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 2, 33, 59),
-                    ),
-                    child: const Text('Buy'),
-                    onPressed: () {
-                      Get.to(() => const ScreenPayment());
-                    },
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 15.0,
+                  vertical: 15.0,
+                ),
+                child: GetBuilder<AddressController>(
+                  builder: (_) => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      boldTextStyle(16, kDarkColor, 'Price Details')!,
+                      controller.fullname == null
+                          ? const SizedBox()
+                          : ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    const Color.fromARGB(255, 2, 33, 59),
+                              ),
+                              child: const Text('Buy'),
+                              onPressed: () {
+                                Get.to(() => ScreenPayment(
+                                      payableamount: totalamount,
+                                      contact:
+                                          controller.phoneNumber.toString(),
+                                    ));
+                              },
+                            ),
+                    ],
                   ),
-                ],
-              ),
-            ),
+                )),
             const Divider(
               thickness: 1,
               color: ksilverOriginal,

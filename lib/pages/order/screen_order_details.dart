@@ -103,7 +103,7 @@ class ScreenOrderDetails extends StatelessWidget {
                 boldTextStyle(14, kDarkColor, 'Payment Details')!,
                 kheight10,
                 Container(
-                  height: height * 0.25,
+                  height: height * 0.18,
                   decoration: BoxDecoration(
                       border: Border.all(),
                       borderRadius: BorderRadius.circular(10)),
@@ -133,6 +133,7 @@ class ScreenOrderDetails extends StatelessWidget {
         Step(
           title: regularTextStyle(8, ksilverOriginal, 'Packing', 1)!,
           content: Container(),
+          isActive: true,
         ),
         Step(
           title: regularTextStyle(8, ksilverOriginal, 'Shipping', 1)!,

@@ -2,10 +2,10 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:smartbuy/services/models/address/model_address.dart';
-import 'package:smartbuy/utils/constants.dart';
 
 class AddressController extends GetxController {
-  int groupValue = box.read('curaddress') ?? -1;
+  // int groupValue = box.read('curaddress') ?? -1;
+  int groupValue = -1;
   String? fullname;
   String? housenoorbuildingname;
   String? roadareacolony;

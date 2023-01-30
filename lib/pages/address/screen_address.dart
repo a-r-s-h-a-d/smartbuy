@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartbuy/services/functions/address/list_address.dart';
 import 'package:smartbuy/services/models/address/model_address.dart';
-import 'package:smartbuy/services/provider/address_controller.dart';
+import 'package:smartbuy/services/controller/address_controller.dart';
 import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/utils/constants.dart';
 import 'package:smartbuy/pages/add_address/add_address.dart';

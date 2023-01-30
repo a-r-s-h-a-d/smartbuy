@@ -4,7 +4,6 @@ import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/pages/account/widgets/account_tile.dart';
 import 'package:smartbuy/pages/address/screen_address.dart';
 import 'package:smartbuy/pages/order/screen_order.dart';
-import 'package:smartbuy/pages/payment/screen_payment.dart';
 import 'package:smartbuy/pages/profile/screen_profile.dart';
 import 'package:smartbuy/pages/settings/screen_settings.dart';
 import 'package:smartbuy/utils/styles.dart';
@@ -52,11 +51,6 @@ class ScreenAccount extends StatelessWidget {
               icon: Icons.location_on_outlined,
               title: 'Address',
               route: ScreenAddress(),
-            ),
-            const AccountTile(
-              icon: Icons.payment,
-              title: 'Payment',
-              route: ScreenPayment(),
             ),
             const AccountTile(
               icon: Icons.settings,
