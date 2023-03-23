@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smartbuy/services/controller/product_controller.dart';
 import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/utils/constants.dart';
 import 'package:smartbuy/utils/styles.dart';
@@ -9,7 +12,7 @@ class Product extends StatelessWidget {
   final String productImage;
   final String productname;
   final String price;
-  const Product({
+  Product({
     required this.screenname,
     required this.productImage,
     required this.productname,
@@ -21,6 +24,8 @@ class Product extends StatelessWidget {
 
   final double height;
   final double width;
+  // final ProductController controller = ProductController();
+  final controller = Get.put(ProductController());
 
   @override
   Widget build(BuildContext context) {
@@ -55,33 +60,13 @@ class Product extends StatelessWidget {
                     regularTextStyle(12, kBlueColor, '₹ $price', 1)!,
                     const Spacer(),
                     IconButton(
-                        onPressed: () {},
-                        icon: screenname == 'wishlist'
-                            ? InkWell(
-                                child: const Icon(Icons.favorite),
-                                onTap: () {
-                                  Get.defaultDialog(
-                                    title: "Alert",
-                                    content: const Text(
-                                      'Are you sure,\nDo you really want to remove the product',
-                                      style: TextStyle(
-                                          color: kSilver, fontSize: 14),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    confirm: TextButton(
-                                        onPressed: () {},
-                                        child: regularTextStyle(
-                                            12, Colors.green, 'OK', 1)!),
-                                    cancel: TextButton(
-                                        onPressed: () {
-                                          Get.back();
-                                        },
-                                        child: regularTextStyle(
-                                            12, Colors.red, 'Cancel', 1)!),
-                                  );
-                                },
-                              )
-                            : const Icon(Icons.favorite_border))
+                        onPressed: () {
+                          log('pressed');
+                          controller.isFav();
+                        },
+                        icon: GetBuilder<ProductController>(
+                          builder: (controller) => Icon(controller.icon),
+                        ))
                   ],
                 ),
               ],

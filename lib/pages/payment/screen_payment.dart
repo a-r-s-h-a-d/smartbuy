@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:smartbuy/pages/payment/screen_payment_success.dart';
+import 'package:smartbuy/services/controller/address_controller.dart';
+import 'package:smartbuy/services/functions/order/add_to_order.dart';
 import 'package:smartbuy/services/functions/razorpay/razorpay.dart';
 import 'package:smartbuy/services/controller/payment_controller.dart';
+import 'package:smartbuy/services/models/cart/model_cart.dart';
 import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/utils/constants.dart';
 import 'package:smartbuy/utils/styles.dart';
@@ -13,12 +16,17 @@ class ScreenPayment extends StatelessWidget {
     super.key,
     required this.payableamount,
     required this.contact,
+    required this.address,
+    required this.cartList,
   });
   final int? groupValue = 0;
   final int payableamount;
   final String contact;
-  Razorpay? razorpay;
+  final List<ModelCart>? cartList;
+  final String address;
+  // Razorpay? razorpay;
   final PaymentController controller = Get.put(PaymentController());
+  AddressController addrcontroller = Get.put(AddressController());
 
   @override
   Widget build(BuildContext context) {
@@ -72,14 +80,58 @@ class ScreenPayment extends StatelessWidget {
         height: height * 0.06,
         width: double.infinity,
         child: ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
             if (controller.groupValue == 0) {
               makePayment(
-                  amount: payableamount.toString(),
-                  contact: contact,
-                  email: userEmail!,
-                  context: context);
+                amount: payableamount.toString(),
+                contact: contact,
+                email: userEmail!,
+                context: context,
+                address: address,
+                cartList: cartList!,
+                customername: addrcontroller.fullname!,
+              );
             } else {
+              //place the order
+              DateTime now = DateTime.now();
+              String formattedDate =
+                  "${now.day.toString().padLeft(2, '0')}-${now.month.toString().padLeft(2, '0')}-${now.year.toString()} ${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}";
+              for (var item in cartList!) {
+                int randomInt = rand.nextInt(100);
+                addOrderDetailsinOrder(
+                  orderid: formattedDate
+                          .replaceAll('-', '')
+                          .replaceAll(':', '')
+                          .replaceAll(' ', '') +
+                      randomInt.toString(),
+                  customername: addrcontroller.fullname.toString(),
+                  address: address,
+                  ordertime: formattedDate,
+                  productname: item.productname,
+                  productimage: item.productimage,
+                  size: item.size,
+                  quantity: item.quantity.toString(),
+                  price: item.price,
+                  orderStatus: 1,
+                  paymentStatus: 'COD',
+                  isCancelled: false,
+                );
+              }
+              //delete current cart list
+
+              // Get a reference to the collection
+              CollectionReference collectionRef = FirebaseFirestore.instance
+                  .collection('user')
+                  .doc(userEmail!)
+                  .collection('cart');
+
+              // Get all documents in the collection
+              QuerySnapshot querySnapshot = await collectionRef.get();
+
+              // Delete each document in the collection
+              querySnapshot.docs.forEach((documentSnapshot) {
+                documentSnapshot.reference.delete();
+              });
               Get.to(() => const ScreenPaymentSuccess());
             }
           },
@@ -121,7 +173,9 @@ class ScreenPayment extends StatelessWidget {
                   borderRadius: kBradius10,
                   color: kWhiteColor,
                   image: DecorationImage(
-                      image: AssetImage(imageIcon), fit: BoxFit.contain),
+                    image: AssetImage(imageIcon),
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
               title: boldTextStyle(12, kDarkColor, title),

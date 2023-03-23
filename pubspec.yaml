@@ -33,7 +33,8 @@ dependencies:
   carousel_pro: ^1.0.0
   carousel_slider: ^4.2.0
   cloud_firestore: ^4.3.0
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.5
+  easy_stepper: ^0.3.2
   firebase_auth: ^4.2.3
   flutter:
     sdk: flutter
@@ -77,6 +78,8 @@ flutter:
     - assets/animation/empty_cart.json
     - assets/images/razorpay-icon.png
     - assets/images/hand-money-dollar-coin-icon.png
+    - assets/animation/empty_order_new.json
+
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

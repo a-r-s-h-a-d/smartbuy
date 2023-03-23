@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:smartbuy/pages/cart/widgets/build_product.dart';
+import 'package:smartbuy/pages/cart/widgets/build_cart.dart';
 import 'package:smartbuy/services/functions/cart/fetch_from_cart.dart';
 import 'package:smartbuy/services/models/cart/model_cart.dart';
 import 'package:smartbuy/utils/colors.dart';

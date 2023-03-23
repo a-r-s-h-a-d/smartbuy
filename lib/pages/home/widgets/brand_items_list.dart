@@ -33,13 +33,12 @@ class BrandItemsList extends StatelessWidget {
             );
           } else {
             return GridView(
-              // scrollDirection: Axis.vertical,
               shrinkWrap: true,
               physics: const ScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.57,
-                  crossAxisSpacing: 20,
+                  childAspectRatio: 0.69,
+                  crossAxisSpacing: 10,
                   mainAxisSpacing: 0),
               children: products
                   .map(

@@ -14,7 +14,11 @@ import 'package:smartbuy/utils/styles.dart';
 class ScreenCheckout extends StatelessWidget {
   final int totalamount;
   final List<ModelCart>? cartList;
-  ScreenCheckout({super.key, required this.totalamount, this.cartList});
+  ScreenCheckout({
+    super.key,
+    required this.totalamount,
+    this.cartList,
+  });
 
   AddressController controller = Get.put(AddressController());
   ModelAddress? result;
@@ -267,9 +271,12 @@ class ScreenCheckout extends StatelessWidget {
                               child: const Text('Buy'),
                               onPressed: () {
                                 Get.to(() => ScreenPayment(
+                                      cartList: cartList,
                                       payableamount: totalamount,
                                       contact:
                                           controller.phoneNumber.toString(),
+                                      address:
+                                          '${controller.housenoorbuildingname.toString()} , ${controller.roadareacolony.toString()} , ${controller.city.toString()} , ${controller.state.toString()} - ${controller.pincode.toString()}',
                                     ));
                               },
                             ),

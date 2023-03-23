@@ -36,7 +36,7 @@ class ScreenPaymentSuccess extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: GestureDetector(
-              onTap: () => Get.to(() => const ScreenOrder()),
+              onTap: () => Get.off(() => const ScreenOrder()),
               child: Container(
                 height: height * 0.05,
                 width: double.infinity,
