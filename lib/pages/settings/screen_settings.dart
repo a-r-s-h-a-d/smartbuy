@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartbuy/utils/colors.dart';
-import 'package:smartbuy/pages/account/widgets/account_tile.dart';
+import 'package:smartbuy/pages/account&add_profile/widgets/account_tile.dart';
 import 'package:smartbuy/utils/styles.dart';
 
 class ScreenSettings extends StatelessWidget {
@@ -32,27 +32,27 @@ class ScreenSettings extends StatelessWidget {
           AccountTile(
             icon: Icons.admin_panel_settings_outlined,
             title: 'Terms and Conditions',
-            route: ScreenSettings(),
+            // route: ScreenSettings(),
           ),
           AccountTile(
             icon: Icons.privacy_tip_outlined,
             title: 'Privacy Policy',
-            route: ScreenSettings(),
+            // route: ScreenSettings(),
           ),
           AccountTile(
             icon: Icons.refresh_rounded,
             title: 'Returns,Refunds and Replacement Policy',
-            route: ScreenSettings(),
+            // route: ScreenSettings(),
           ),
           AccountTile(
             icon: Icons.star_border,
             title: 'Rate smartbuy',
-            route: ScreenSettings(),
+            // route: ScreenSettings(),
           ),
           AccountTile(
             icon: Icons.share,
             title: 'Share',
-            route: ScreenSettings(),
+            // route: ScreenSettings(),
           ),
         ],
       ),

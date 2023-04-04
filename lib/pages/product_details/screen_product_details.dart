@@ -1,28 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get.dart';
+import 'package:smartbuy/services/controller/wishlist_controller.dart';
+import 'package:smartbuy/services/models/products/model_product.dart';
 import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/utils/constants.dart';
 import 'package:smartbuy/pages/product_details/widgets/bottom_sheet_button.dart';
 import 'package:smartbuy/pages/widgets/carousel.dart';
 import 'package:smartbuy/pages/review/screen_review.dart';
-import 'package:smartbuy/pages/review/widgets/review_model.dart';
 import 'package:smartbuy/utils/styles.dart';
 
 class ScreenProductDetails extends StatefulWidget {
-  final String productname;
-  final String price;
-  final List<dynamic> size;
-  final String description;
-  final List<dynamic> productimages;
+  final Products product;
   const ScreenProductDetails({
-    required this.productname,
-    required this.price,
     super.key,
-    required this.size,
-    required this.description,
-    required this.productimages,
+    required this.product,
   });
 
   @override
@@ -30,20 +21,19 @@ class ScreenProductDetails extends StatefulWidget {
 }
 
 class _ScreenProductDetailsState extends State<ScreenProductDetails> {
+  final controller = Get.put(WishlistController());
+
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(height * 0.1),
-        child: AppBar(
-          iconTheme: const IconThemeData(color: Colors.black),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: boldTextStyle(15, kDarkColor, widget.productname),
-        ),
+      appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.black),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: boldTextStyle(15, kDarkColor, widget.product.productname),
       ),
       body: ListView(
         shrinkWrap: true,
@@ -52,13 +42,11 @@ class _ScreenProductDetailsState extends State<ScreenProductDetails> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //
               //carousel
-              //
               SizedBox(
                 height: height * 0.35,
                 width: double.infinity,
-                child: Carousel(imgList: widget.productimages),
+                child: Carousel(imgList: widget.product.productimages),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -71,7 +59,7 @@ class _ScreenProductDetailsState extends State<ScreenProductDetails> {
                         SizedBox(
                           width: width * 0.71,
                           child: Text(
-                            widget.productname,
+                            widget.product.productname,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
@@ -81,11 +69,31 @@ class _ScreenProductDetailsState extends State<ScreenProductDetails> {
                             ),
                           ),
                         ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.favorite_border),
-                          iconSize: 30,
-                        ),
+                        StreamBuilder(
+                          stream: controller.readWishlist(),
+                          builder: (context, snapshot) {
+                            final wishlist = snapshot.data;
+                            return IconButton(
+                              iconSize: 30,
+                              onPressed: () {
+                                if (wishlist?.any((element) =>
+                                        element.productname ==
+                                        widget.product.productname) ??
+                                    false) {
+                                  controller.removefromWishlist(widget.product);
+                                } else {
+                                  controller.addtoWishlist(widget.product);
+                                }
+                              },
+                              icon: wishlist?.any((element) =>
+                                          element.productname ==
+                                          widget.product.productname) ==
+                                      true
+                                  ? const Icon(Icons.favorite)
+                                  : const Icon(Icons.favorite_border),
+                            );
+                          },
+                        )
                       ],
                     ),
                     kheight10,
@@ -97,23 +105,25 @@ class _ScreenProductDetailsState extends State<ScreenProductDetails> {
                     //   ),
                     //   onRatingUpdate: (rating) {},
                     // ),
-                    boldTextStyle(16, kBlueColor, '₹ ${widget.price}')!,
-                    kheight20,
-                    boldTextStyle(14, kDarkColor, 'Select Size')!,
-                    kheight20,
+                    // boldTextStyle(16, kBlueColor, '₹ ${widget.price}')!,
+                    currency(16, kBlueColor, int.parse(widget.product.price))!,
+                    kheight10,
+                    boldTextStyle(14, kDarkColor, 'Available Size')!,
+                    kheight10,
                     Row(
                       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: List.generate(
-                        widget.size.length,
+                        widget.product.size.length,
                         (index) {
                           return sizeButton(index);
                         },
                       ),
                     ),
-                    kheight50,
-                    boldTextStyle(15, kDarkColor, 'Product Description')!,
                     kheight20,
-                    regularTextStyle(12, kBlackColor, widget.description, 8)!,
+                    boldTextStyle(15, kDarkColor, 'Product Description')!,
+                    kheight10,
+                    regularTextStyle(
+                        12, kBlackColor, widget.product.description, 8)!,
 
                     //Display Reviews
 
@@ -129,7 +139,7 @@ class _ScreenProductDetailsState extends State<ScreenProductDetails> {
                       ],
                     ),
                     kheight30,
-                    const ReviewModel(itemCount: 1),
+                    // const ReviewModel(itemCount: 1),
                   ],
                 ),
               )
@@ -137,34 +147,16 @@ class _ScreenProductDetailsState extends State<ScreenProductDetails> {
           )
         ],
       ),
-      bottomSheet: Padding(
-        padding: const EdgeInsets.only(
-          bottom: 8,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            BottomSheetButton(
-              height: height,
-              width: width * 0.4,
-              buttoncolor: kWhiteColor,
-              labelcolor: kBlueColor,
-              label: 'Wishlist',
-            ),
-            kwidth20,
-            BottomSheetButton(
-              height: height,
-              width: width * 0.4,
-              buttoncolor: kBlueColor,
-              labelcolor: kWhiteColor,
-              label: 'Add to Cart',
-              productname: widget.productname,
-              productimage: widget.productimages[0],
-              price: widget.price,
-              size: widget.size[selectedIndex],
-            ),
-          ],
-        ),
+      bottomSheet: BottomSheetButton(
+        height: height,
+        width: double.infinity,
+        buttoncolor: kBlueColor,
+        labelcolor: kWhiteColor,
+        label: 'Add to Cart',
+        productname: widget.product.productname,
+        productimage: widget.product.productimages[0],
+        price: widget.product.price,
+        size: widget.product.size[selectedIndex],
       ),
     );
   }
@@ -192,7 +184,7 @@ class _ScreenProductDetailsState extends State<ScreenProductDetails> {
           child: regularTextStyle(
             10,
             selectedIndex == index ? kWhiteColor : kBlackColor,
-            widget.size[index],
+            widget.product.size[index],
             1,
           ),
         ),

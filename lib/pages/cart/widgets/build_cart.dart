@@ -4,7 +4,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smartbuy/pages/cart/widgets/texticonbutton.dart';
+import 'package:smartbuy/services/controller/wishlist_controller.dart';
 import 'package:smartbuy/services/models/cart/model_cart.dart';
 import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/utils/constants.dart';
@@ -23,9 +25,9 @@ class BuildCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WishlistController controller = Get.put(WishlistController());
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-
     return Column(
       children: [
         kheight20,
@@ -148,11 +150,21 @@ class BuildCart extends StatelessWidget {
                   ],
                 ),
                 Row(
-                  mainAxisSize: MainAxisSize.min,
+                  // mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const TextIconButton(
-                      icon: Icons.archive_outlined,
-                      label: 'wishlist',
+                    StreamBuilder(
+                      stream: controller.readWishlist(),
+                      builder: (context, snapshot) {
+                        // final wishlist = snapshot.data;
+                        return GestureDetector(
+                          onTap: () {},
+                          child: const TextIconButton(
+                            icon: Icons.archive_outlined,
+                            label: 'wishlist',
+                          ),
+                        );
+                      },
                     ),
                     TextIconButton(
                       icon: Icons.delete,
@@ -160,10 +172,10 @@ class BuildCart extends StatelessWidget {
                       productname: cart.productname,
                       size: cart.size,
                     ),
-                    const TextIconButton(
-                      icon: Icons.flash_on,
-                      label: 'Buy this now',
-                    ),
+                    // const TextIconButton(
+                    //   icon: Icons.flash_on,
+                    //   label: 'Buy this now',
+                    // ),
                   ],
                 )
               ],

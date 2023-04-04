@@ -40,6 +40,8 @@ StreamBuilder<List<ModelOrder>> buildOrder(double height, double width,
                       tab: tab,
                       statusno: orderList[index].orderstatus,
                       isCancelled: orderList[index].isCancelled,
+                      index: index,
+                      orderList: orderList,
                     ),
                     child: Container(
                       height: height * 0.25,

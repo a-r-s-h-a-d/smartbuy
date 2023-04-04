@@ -17,21 +17,16 @@ class ScreenCart extends StatelessWidget {
     int totalamount = 0;
 
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(height * 0.1),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 35),
-          child: AppBar(
-            iconTheme: const IconThemeData(color: Colors.black),
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            title: boldTextStyle(15, kDarkColor, 'Your Cart'),
-          ),
-        ),
+      appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.black),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: boldTextStyle(15, kDarkColor, '🛒 Cart'),
+        centerTitle: true,
       ),
       body: Padding(
         padding:
-            const EdgeInsets.only(left: 8.0, right: 8.0, top: 20, bottom: 20),
+            const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0, bottom: 20),
         child: ListView(
           children: [
             /* to list cart products */

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quickalert/models/quickalert_type.dart';
-import 'package:quickalert/widgets/quickalert_dialog.dart';
-import 'package:smartbuy/pages/address/screen_address.dart';
 import 'package:smartbuy/services/functions/address/add_to_address.dart';
 import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/utils/constants.dart';
@@ -178,24 +175,17 @@ class ScreenAddAddress extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      QuickAlert.show(
-                        context: context,
-                        type: QuickAlertType.success,
-                        onCancelBtnTap: () => Get.back(),
-                        onConfirmBtnTap: () {
-                          addtoAddress(
-                              fullname: fullnameController.text.trim(),
-                              phoneNumber: phoneNumberController.text.trim(),
-                              pincode: pinCodeController.text.trim(),
-                              state: stateController.text.trim(),
-                              city: cityController.text.trim(),
-                              housenoorbuildingname:
-                                  housenobuildingnameController.text.trim(),
-                              roadareacolony:
-                                  roadnameAreaColonyController.text.trim());
-                          Get.off(() => ScreenAddress());
-                        },
-                      );
+                      addtoAddress(
+                          fullname: fullnameController.text.trim(),
+                          phoneNumber: phoneNumberController.text.trim(),
+                          pincode: pinCodeController.text.trim(),
+                          state: stateController.text.trim(),
+                          city: cityController.text.trim(),
+                          housenoorbuildingname:
+                              housenobuildingnameController.text.trim(),
+                          roadareacolony:
+                              roadnameAreaColonyController.text.trim());
+                      Get.back();
                     }
                     return;
                   },

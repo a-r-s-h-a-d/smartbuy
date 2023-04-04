@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:smartbuy/services/models/products/model_product.dart';
 import 'package:smartbuy/utils/constants.dart';
 import 'package:smartbuy/pages/home/widgets/product.dart';
 
 class ProductStructure extends StatelessWidget {
   final String screenname;
-  final String productname;
-  final String price;
-  final String productImage;
+  final Products product;
+
   const ProductStructure({
     Key? key,
     required this.screenname,
-    required this.productImage,
-    required this.productname,
-    required this.price,
+    required this.product,
     required this.height,
     required this.width,
   }) : super(key: key);
@@ -32,9 +30,7 @@ class ProductStructure extends StatelessWidget {
             height: height,
             width: width,
             screenname: screenname,
-            productImage: productImage,
-            productname: productname,
-            price: price,
+            product: product,
           ),
         ],
       ),

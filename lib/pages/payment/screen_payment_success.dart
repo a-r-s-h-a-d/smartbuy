@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartbuy/pages/order/screen_order.dart';
+import 'package:smartbuy/pages/tabs/main_page/screen_mainpage.dart';
+import 'package:smartbuy/pages/tabs/main_page/widgets/bottom_nav.dart';
 import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/utils/constants.dart';
 import 'package:smartbuy/utils/styles.dart';
@@ -36,7 +37,10 @@ class ScreenPaymentSuccess extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: GestureDetector(
-              onTap: () => Get.off(() => const ScreenOrder()),
+              onTap: () {
+                Get.offAll(ScreenMainPage());
+                indexChangeNotifier.value = 3;
+              },
               child: Container(
                 height: height * 0.05,
                 width: double.infinity,

@@ -21,6 +21,8 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       keyboardType: keyboardType,
       decoration: InputDecoration(
+        filled: true,
+        fillColor: ktextfieldColor,
         prefixIcon: icon == null
             ? null
             : Icon(
@@ -31,6 +33,7 @@ class CustomTextFormField extends StatelessWidget {
         labelText: label,
         labelStyle: const TextStyle(color: kSilver, fontSize: 10),
         border: OutlineInputBorder(
+          borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(10),
         ),
       ),

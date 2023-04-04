@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smartbuy/pages/home/widgets/heading2.dart';
 import 'package:smartbuy/services/models/order/model_order.dart';
+import 'package:smartbuy/utils/constants.dart';
 
 orderStatus({required int orderStatus, required bool iscancelled}) {
   if (orderStatus == 1 && !iscancelled) {
@@ -46,13 +47,26 @@ class OrderStatusDates extends StatelessWidget {
   }
 }
 
-bool orderVisibility(
-    {required String tab, required int statusno, bool? isCancelled}) {
-  if (tab == 'active' && statusno >= 0 && statusno < 4 && !isCancelled!) {
+bool orderVisibility({
+  required String tab,
+  required int statusno,
+  bool? isCancelled,
+  required List<ModelOrder> orderList,
+  required int index,
+}) {
+  if (tab == 'active' &&
+      statusno >= 0 &&
+      statusno < 4 &&
+      !isCancelled! &&
+      userEmail == orderList[index].userEmail) {
     return true;
-  } else if (tab == 'completed' && statusno == 4) {
+  } else if (tab == 'completed' &&
+      statusno == 4 &&
+      userEmail == orderList[index].userEmail) {
     return true;
-  } else if (tab == 'cancelled' && isCancelled == true) {
+  } else if (tab == 'cancelled' &&
+      isCancelled == true &&
+      userEmail == orderList[index].userEmail) {
     return true;
   }
   return false;

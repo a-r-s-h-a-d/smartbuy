@@ -1,10 +1,10 @@
 // ignore_for_file: must_be_immutable
 
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartbuy/services/functions/address/list_address.dart';
+import 'package:smartbuy/services/functions/address/remove_address.dart';
 import 'package:smartbuy/services/models/address/model_address.dart';
 import 'package:smartbuy/services/controller/address_controller.dart';
 import 'package:smartbuy/utils/colors.dart';
@@ -16,7 +16,7 @@ class ScreenAddress extends StatelessWidget {
   ScreenAddress({super.key});
 
   final AddressController controller = Get.put(AddressController());
-  List<ModelAddress>? addressList;
+  List<ModelAddress> addressList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +47,21 @@ class ScreenAddress extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(
-              child: boldTextStyle(14, kDarkColor, 'Something went wrong'),
+              child: boldTextStyle(
+                14,
+                kDarkColor,
+                'Something went wrong',
+              ),
             );
           } else if (snapshot.hasData) {
-            addressList = snapshot.data;
-            if (addressList!.isEmpty) {
-              Center(
-                child: boldTextStyle(14, kDarkColor, 'Add an Address'),
+            addressList = snapshot.data!;
+            if (addressList.isEmpty) {
+              return Center(
+                child: boldTextStyle(
+                  14,
+                  kDarkColor,
+                  'Add an Address',
+                ),
               );
             } else {
               return ListView(
@@ -61,9 +69,9 @@ class ScreenAddress extends StatelessWidget {
                   ListView.builder(
                     shrinkWrap: true,
                     physics: const ScrollPhysics(),
-                    itemCount: addressList!.length,
+                    itemCount: addressList.length,
                     itemBuilder: (context, index) {
-                      address = addressList![index];
+                      address = addressList[index];
                       return BuildAddress(
                         address: address,
                         index: index,
@@ -77,17 +85,29 @@ class ScreenAddress extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         },
       ),
-      bottomSheet: Container(
-          color: kBlueColor,
-          height: height * 0.06,
-          width: double.infinity,
-          child: TextButton(
-              onPressed: () {
-                final addressindex = controller.groupValue;
-                log(addressList![addressindex].fullname.toString());
-                Navigator.pop(context, addressList![addressindex]);
-              },
-              child: regularTextStyle(12, kWhiteColor, 'Deliver Here', 1)!)),
+      // bottomSheet: StreamBuilder(
+      //   stream: readAddress(),
+      //   builder: (context, snapshot) {
+      //     addressList = snapshot.data ?? [];
+      //     if (addressList.isNotEmpty) {
+      //       return Container(
+      //         color: kBlueColor,
+      //         height: height * 0.06,
+      //         width: double.infinity,
+      //         child: TextButton(
+      //           onPressed: () {
+      //             final addressindex = controller.groupValue;
+      //             log(addressList[addressindex].fullname.toString());
+
+      //             Navigator.pop(context, addressList[addressindex]);
+      //           },
+      //           child: regularTextStyle(12, kWhiteColor, 'Deliver Here', 1)!,
+      //         ),
+      //       );
+      //     }
+      //     return Container();
+      //   },
+      // ),
     );
   }
 }
@@ -119,11 +139,13 @@ class BuildAddress extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 18.0),
                 child: IconButton(
                   icon: const Icon(
-                    Icons.edit_location,
+                    Icons.delete,
                     color: kBlueColor,
-                    size: 40,
+                    size: 25,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    removeaddress(address!.housenoorbuildingname);
+                  },
                 ),
               ),
               value: index,

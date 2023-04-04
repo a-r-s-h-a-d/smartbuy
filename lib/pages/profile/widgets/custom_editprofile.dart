@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartbuy/utils/colors.dart';
-import 'package:smartbuy/pages/account/screen_account.dart';
+import 'package:smartbuy/pages/account&add_profile/screen_account.dart';
 import 'package:smartbuy/pages/widgets/custom_text_form_field.dart';
 import 'package:smartbuy/utils/styles.dart';
 

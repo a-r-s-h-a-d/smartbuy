@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:smartbuy/services/models/brand/brand.dart';
-import 'package:smartbuy/services/models/products/products.dart';
+import 'package:smartbuy/services/models/products/model_product.dart';
 
 Stream<List<Brand>> listBrands() => FirebaseFirestore.instance
     .collection('brands')

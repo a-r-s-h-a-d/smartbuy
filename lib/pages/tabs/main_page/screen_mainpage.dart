@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smartbuy/pages/account/screen_account.dart';
+import 'package:smartbuy/pages/account&add_profile/screen_account.dart';
 import 'package:smartbuy/pages/cart/screen_cart.dart';
 import 'package:smartbuy/pages/explore/screen_explore.dart';
 import 'package:smartbuy/pages/home/screen_home.dart';

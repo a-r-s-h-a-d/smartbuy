@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smartbuy/pages/widgets/productbrandwisecontent.dart';
+import 'package:smartbuy/services/controller/wishlist_controller.dart';
 import 'package:smartbuy/services/functions/product/list_product.dart';
 import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/utils/styles.dart';
 
 class ScreenProductsAndWishlist extends StatelessWidget {
   final String screenname;
-
   const ScreenProductsAndWishlist({
     required this.screenname,
     super.key,
@@ -14,21 +15,20 @@ class ScreenProductsAndWishlist extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+    final controller = Get.put(WishlistController());
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(height * 0.1),
-        child: AppBar(
-          iconTheme: const IconThemeData(color: Colors.black),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: boldTextStyle(15, kDarkColor, screenname),
-        ),
+      appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.black),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: boldTextStyle(15, kDarkColor, screenname),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(10.0),
         child: StreamBuilder(
-          stream: readProductsbyBrandwise(screenname: screenname),
+          stream: screenname == 'wishlist'
+              ? controller.readWishlist()
+              : readProductsbyBrandwise(screenname: screenname),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Center(
@@ -46,18 +46,12 @@ class ScreenProductsAndWishlist extends StatelessWidget {
                 return GridView(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: 0.57,
+                      childAspectRatio: 0.69,
                       crossAxisSpacing: 10,
-                      mainAxisSpacing: 10),
+                      mainAxisSpacing: 0),
                   children: product
                       .map((product) => ProductBrandwiseContent(
-                            screenname: screenname,
-                            productname: product.productname,
-                            price: product.price,
-                            productimages: product.productimages,
-                            size: product.size,
-                            description: product.description,
-                          ))
+                          screenname: screenname, product: product))
                       .toList(),
                 );
               }

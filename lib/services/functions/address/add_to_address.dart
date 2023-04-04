@@ -14,7 +14,7 @@ Future addtoAddress(
       .collection('user')
       .doc(userEmail)
       .collection('address')
-      .doc();
+      .doc(housenoorbuildingname);
 
   final address = ModelAddress(
       id: docAddress.id,

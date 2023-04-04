@@ -2,22 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartbuy/pages/home/widgets/product_structure.dart';
 import 'package:smartbuy/pages/product_details/screen_product_details.dart';
+import 'package:smartbuy/services/models/products/model_product.dart';
 
 class ProductBrandwiseContent extends StatelessWidget {
   final String screenname;
-  final String productname;
-  final String price;
-  final String description;
-  final List<dynamic> productimages;
-  final List<dynamic> size;
+  final Products product;
+
   const ProductBrandwiseContent({
     super.key,
     required this.screenname,
-    required this.productname,
-    required this.price,
-    required this.productimages,
-    required this.description,
-    required this.size,
+    required this.product,
   });
 
   @override
@@ -27,19 +21,13 @@ class ProductBrandwiseContent extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Get.to(() => ScreenProductDetails(
-              productname: productname,
-              price: price,
-              size: size,
-              productimages: productimages,
-              description: description,
+              product: product,
             ));
       },
       child: ProductStructure(
         height: height,
         width: width,
-        productImage: productimages[0],
-        productname: productname,
-        price: price,
+        product: product,
         screenname: screenname,
       ),
     );

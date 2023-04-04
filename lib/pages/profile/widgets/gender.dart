@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smartbuy/utils/colors.dart';
 import 'package:smartbuy/utils/constants.dart';
-import 'package:smartbuy/pages/profile/screen_profile.dart';
 import 'package:smartbuy/utils/styles.dart';
 
 class Gender extends StatelessWidget {
@@ -66,9 +65,9 @@ class Gender extends StatelessWidget {
           width: width * 0.9,
           child: ElevatedButton(
             onPressed: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => ScreenProfile(),
-              ));
+              // Navigator.of(context).pushReplacement(MaterialPageRoute(
+              //   builder: (context) => ScreenProfile(),
+              // ));
             },
             child: boldTextStyle(13, kWhiteColor, 'Save'),
           ),

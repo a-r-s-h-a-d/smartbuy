@@ -9,9 +9,14 @@ import 'package:smartbuy/pages/home/widgets/popular_brands.dart';
 import 'package:smartbuy/pages/widgets/custom_home_notification_appbar.dart';
 import 'package:smartbuy/utils/images.dart';
 
-class ScreenHome extends StatelessWidget {
+class ScreenHome extends StatefulWidget {
   const ScreenHome({super.key});
 
+  @override
+  State<ScreenHome> createState() => _ScreenHomeState();
+}
+
+class _ScreenHomeState extends State<ScreenHome> {
   @override
   Widget build(BuildContext context) {
     final userEmail = FirebaseAuth.instance.currentUser!.email;
