@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -97,13 +99,14 @@ class ScreenPayment extends StatelessWidget {
               String formattedDate =
                   "${now.day.toString().padLeft(2, '0')}-${now.month.toString().padLeft(2, '0')}-${now.year.toString()} ${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}";
               for (var item in cartList!) {
-                int randomInt = rand.nextInt(100);
+                int randomInt = rand.nextInt(99);
+                String orderid = formattedDate
+                        .replaceAll('-', '')
+                        .replaceAll(':', '')
+                        .replaceAll(' ', '') +
+                    randomInt.toString();
                 addOrderDetailsinOrder(
-                  orderid: formattedDate
-                          .replaceAll('-', '')
-                          .replaceAll(':', '')
-                          .replaceAll(' ', '') +
-                      randomInt.toString(),
+                  orderid: orderid,
                   customername: addrcontroller.fullname.toString(),
                   address: address,
                   ordertime: formattedDate,
@@ -116,6 +119,7 @@ class ScreenPayment extends StatelessWidget {
                   paymentStatus: 'COD',
                   isCancelled: false,
                 );
+                log(orderid);
               }
               //delete current cart list
 
@@ -129,9 +133,9 @@ class ScreenPayment extends StatelessWidget {
               QuerySnapshot querySnapshot = await collectionRef.get();
 
               // Delete each document in the collection
-              querySnapshot.docs.forEach((documentSnapshot) {
+              for (var documentSnapshot in querySnapshot.docs) {
                 documentSnapshot.reference.delete();
-              });
+              }
               Get.to(() => const ScreenPaymentSuccess());
             }
           },

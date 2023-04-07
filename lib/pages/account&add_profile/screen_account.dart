@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartbuy/pages/account&add_profile/screen_add_or_edit_profile.dart';
+import 'package:smartbuy/pages/account&add_profile/screen_add_profile.dart';
+import 'package:smartbuy/pages/account&add_profile/screen_edit_profile.dart';
 import 'package:smartbuy/pages/profile/widgets/build_profile.dart';
 import 'package:smartbuy/services/functions/auth_service/auth_service.dart';
 import 'package:smartbuy/services/functions/profile/read_profile.dart';
@@ -64,22 +65,25 @@ class ScreenAccount extends StatelessWidget {
           );
         },
       ),
-      bottomSheet: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FloatingActionButton(
-              onPressed: () {
-                Get.to(ScreenAddProfile());
-              },
-              child: const Icon(
-                Icons.edit,
-                color: kWhiteColor,
-              ),
+      floatingActionButton: StreamBuilder(
+        stream: readProfile(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError ||
+              !snapshot.hasData ||
+              snapshot.data == null ||
+              (snapshot.data as List).isEmpty) {
+            return Container();
+          }
+          return FloatingActionButton(
+            onPressed: () {
+              Get.to(ScreenEditProfile(profile: profile!));
+            },
+            child: const Icon(
+              Icons.edit,
+              color: kWhiteColor,
             ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartbuy/pages/widgets/custom_text_form_field.dart';
@@ -8,18 +9,32 @@ import 'package:smartbuy/services/functions/profile/add_profile.dart';
 import 'package:smartbuy/services/functions/validations/validation.dart';
 import 'package:smartbuy/services/models/profile/model_profile.dart';
 import 'package:smartbuy/utils/colors.dart';
-import 'package:smartbuy/utils/images.dart';
 import 'package:smartbuy/utils/styles.dart';
 
-class ScreenAddProfile extends StatelessWidget {
-  ScreenAddProfile({
+class ScreenEditProfile extends StatefulWidget {
+  final List<ModelProfile> profile;
+  const ScreenEditProfile({
     super.key,
+    required this.profile,
   });
 
-  static final formKey = GlobalKey<FormState>();
+  @override
+  State<ScreenEditProfile> createState() => _ScreenEditProfileState();
+}
+
+class _ScreenEditProfileState extends State<ScreenEditProfile> {
   final profileController = Get.put(CreateProfileController());
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
+  late TextEditingController nameController;
+  late TextEditingController mobController;
+  late TextEditingController dobController;
+  static final formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    nameController = TextEditingController(text: widget.profile[0].name);
+    mobController = TextEditingController(text: widget.profile[0].mobilenumber);
+    dobController = TextEditingController(text: widget.profile[0].dob);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +42,6 @@ class ScreenAddProfile extends StatelessWidget {
     return Form(
       key: formKey,
       child: Scaffold(
-        // resizeToAvoidBottomInset: false,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(height * 0.18),
           child: AppBar(
@@ -37,7 +51,7 @@ class ScreenAddProfile extends StatelessWidget {
               icon: const Icon(Icons.arrow_back_ios, color: kDarkColor),
               onPressed: () => Get.back(),
             ),
-            title: boldTextStyle(15, kDarkColor, 'Create Profile'),
+            title: boldTextStyle(15, kDarkColor, 'Edit Profile'),
           ),
         ),
         body: Padding(
@@ -49,21 +63,21 @@ class ScreenAddProfile extends StatelessWidget {
                 Center(
                   child: Stack(
                     children: [
-                      GetBuilder<CreateProfileController>(
-                        builder: (_) => CircleAvatar(
+                      CircleAvatar(
                           radius: height * 0.08,
                           backgroundColor: kBlueColor.withOpacity(0.7),
-                          child: CircleAvatar(
-                            backgroundColor: kWhiteColor,
-                            radius: height * 0.073,
-                            backgroundImage: profileController.pickedFile ==
-                                    null
-                                ? const AssetImage(tempprofile) as ImageProvider
-                                : FileImage(
-                                    File(profileController.pickedFile!)),
-                          ),
-                        ),
-                      ),
+                          child: GetBuilder<CreateProfileController>(
+                            builder: (_) => CircleAvatar(
+                              backgroundColor: kWhiteColor,
+                              radius: height * 0.073,
+                              backgroundImage: profileController.pickedFile ==
+                                      null
+                                  ? NetworkImage(widget.profile[0].profileUrl)
+                                      as ImageProvider
+                                  : FileImage(
+                                      File(profileController.pickedFile!)),
+                            ),
+                          )),
                       FractionalTranslation(
                         translation: const Offset(3.1, 2.6),
                         child: InkWell(
@@ -97,12 +111,19 @@ class ScreenAddProfile extends StatelessWidget {
                   },
                 ),
                 SizedBox(height: height * 0.02),
-                boldTextStyle(12, kgreen, 'use the Icon *')!,
+                boldTextStyle(12, kgreen, 'DD/MM/YYYY')!,
                 SizedBox(height: height * 0.02),
-                CustomTextFormField2(),
+                CustomTextFormField(
+                  controller: dobController,
+                  label: 'DOB',
+                  keyboardType: TextInputType.datetime,
+                  validator: (value) {
+                    return validateDateOfBirth(value ?? '');
+                  },
+                ),
                 SizedBox(height: height * 0.04),
                 CustomTextFormField(
-                  controller: phoneController,
+                  controller: mobController,
                   label: 'Phone Number',
                   keyboardType: TextInputType.phone,
                   validator: (value) {
@@ -118,13 +139,15 @@ class ScreenAddProfile extends StatelessWidget {
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
                         try {
-                          String photoUrl =
-                              await profileController.uploadFile();
+                          String? photoUrl =
+                              profileController.pickedFile != null
+                                  ? await profileController.uploadFile()
+                                  : widget.profile[0].profileUrl;
                           addProfile(
                             name: nameController.text,
-                            dob: profileController.controller.text,
+                            dob: dobController.text,
                             profileUrl: photoUrl,
-                            phone: phoneController.text,
+                            phone: mobController.text,
                           );
                           Get.back();
                           Get.snackbar('Success', 'Profile Created',

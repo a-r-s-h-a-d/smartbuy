@@ -21,11 +21,7 @@ Future addOrderDetailsinOrder({
       .doc('admin')
       .collection('order')
       .doc(
-        userEmail! +
-            ordertime
-                .replaceAll('-', '')
-                .replaceAll(':', '')
-                .replaceAll(' ', ''),
+        userEmail! + orderid,
       );
 
   final orderDetails = ModelOrder(

@@ -65,6 +65,9 @@ class ScreenAddAddress extends StatelessWidget {
                   if (value == null || value.isEmpty) {
                     return 'Please provide the necessary details';
                   }
+                  if (value.length != 10) {
+                    return 'number must be 10 digits';
+                  }
                   return null;
                 },
               ),

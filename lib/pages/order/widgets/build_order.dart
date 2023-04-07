@@ -26,7 +26,7 @@ StreamBuilder<List<ModelOrder>> buildOrder(double height, double width,
             ),
           );
         } else {
-          return ListView.separated(
+          return ListView.builder(
               shrinkWrap: true,
               physics: const ScrollPhysics(),
               itemBuilder: (context, index) {
@@ -43,75 +43,82 @@ StreamBuilder<List<ModelOrder>> buildOrder(double height, double width,
                       index: index,
                       orderList: orderList,
                     ),
-                    child: Container(
-                      height: height * 0.25,
-                      decoration: BoxDecoration(
-                        borderRadius: kBradius10,
-                        color: kWhiteColor,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 20),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Heading2(
-                              title: 'Order ID',
-                              navtitle: orderList[index].orderid,
-                              titlesize: 11,
-                              navtitlesize: 11,
-                            ),
-                            Heading2(
-                              title: 'Order Time',
-                              navtitle: orderList[index].ordertime,
-                              titlesize: 11,
-                              navtitlesize: 11,
-                            ),
-                            Heading2(
-                              title: 'Order Status',
-                              navtitle: orderStatus(
-                                orderStatus: orderList[index].orderstatus,
-                                iscancelled: orderList[index].isCancelled,
-                              ),
-                              titlesize: 11,
-                              navtitlesize: 11,
-                            ),
-                            Heading2(
-                              title: 'Amount',
-                              navtitle: orderList[index].price,
-                              titlesize: 11,
-                              navtitlesize: 11,
-                            ),
-                            Row(
+                    child: Column(
+                      children: [
+                        Container(
+                          height: height * 0.25,
+                          decoration: BoxDecoration(
+                            borderRadius: kBradius10,
+                            color: kWhiteColor,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                boldTextStyle(
-                                    12, kBlackColor, 'Payment Status')!,
-                                Container(
-                                  height: height * 0.03,
-                                  width: width * 0.2,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        orderList[index].paymentStatus == 'Paid'
+                                Heading2(
+                                  title: 'Order ID',
+                                  navtitle: orderList[index].orderid,
+                                  titlesize: 11,
+                                  navtitlesize: 11,
+                                ),
+                                Heading2(
+                                  title: 'Order Time',
+                                  navtitle: orderList[index].ordertime,
+                                  titlesize: 11,
+                                  navtitlesize: 11,
+                                ),
+                                Heading2(
+                                  title: 'Order Status',
+                                  navtitle: orderStatus(
+                                    orderStatus: orderList[index].orderstatus,
+                                    iscancelled: orderList[index].isCancelled,
+                                  ),
+                                  titlesize: 11,
+                                  navtitlesize: 11,
+                                ),
+                                Heading2(
+                                  title: 'Amount',
+                                  navtitle: orderList[index].price,
+                                  titlesize: 11,
+                                  navtitlesize: 11,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    boldTextStyle(
+                                        12, kBlackColor, 'Payment Status')!,
+                                    Container(
+                                      height: height * 0.03,
+                                      width: width * 0.2,
+                                      decoration: BoxDecoration(
+                                        color: orderList[index].paymentStatus ==
+                                                'Paid'
                                             ? kgreen
                                             : korangePeel,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Center(
-                                      child: regularTextStyle(10, kWhiteColor,
-                                          orderList[index].paymentStatus, 1)),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Center(
+                                          child: regularTextStyle(
+                                              10,
+                                              kWhiteColor,
+                                              orderList[index].paymentStatus,
+                                              1)),
+                                    )
+                                  ],
                                 )
                               ],
-                            )
-                          ],
+                            ),
+                          ),
                         ),
-                      ),
+                        kheight10,
+                      ],
                     ),
                   ),
                 );
               },
-              separatorBuilder: (context, index) => kheight20,
               itemCount: orderList.length);
         }
       }

@@ -145,39 +145,20 @@ class BuildCart extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    currency(
-                        14, kDarkColor, int.parse(cart.price) * cart.quantity)!
+                    Column(
+                      children: [
+                        currency(14, kDarkColor,
+                            int.parse(cart.price) * cart.quantity)!,
+                        TextIconButton(
+                          icon: Icons.delete,
+                          label: 'Remove',
+                          productname: cart.productname,
+                          size: cart.size,
+                        ),
+                      ],
+                    )
                   ],
                 ),
-                Row(
-                  // mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    StreamBuilder(
-                      stream: controller.readWishlist(),
-                      builder: (context, snapshot) {
-                        // final wishlist = snapshot.data;
-                        return GestureDetector(
-                          onTap: () {},
-                          child: const TextIconButton(
-                            icon: Icons.archive_outlined,
-                            label: 'wishlist',
-                          ),
-                        );
-                      },
-                    ),
-                    TextIconButton(
-                      icon: Icons.delete,
-                      label: 'Remove',
-                      productname: cart.productname,
-                      size: cart.size,
-                    ),
-                    // const TextIconButton(
-                    //   icon: Icons.flash_on,
-                    //   label: 'Buy this now',
-                    // ),
-                  ],
-                )
               ],
             ),
           ),
