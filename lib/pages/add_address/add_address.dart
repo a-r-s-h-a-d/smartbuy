@@ -72,44 +72,16 @@ class ScreenAddAddress extends StatelessWidget {
                 },
               ),
               kheight20,
-              Row(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: CustomTextFormField(
-                      label: 'Pincode (Required)*',
-                      keyboardType: TextInputType.number,
-                      controller: pinCodeController,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please provide the necessary details';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  kheight20,
-                  kwidth20,
-                  Container(
-                    height: height * 0.065,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: kBlueColor,
-                    ),
-                    width: width * 0.3,
-                    child: TextButton.icon(
-                        icon: const Icon(
-                          Icons.gps_fixed,
-                          color: kWhiteColor,
-                        ),
-                        onPressed: () async {
-                          // Position position = await getGeoLocationPosition();
-                          // log(position.toString());
-                        },
-                        label: regularTextStyle(
-                            12, kWhiteColor, 'current location', 3)!),
-                  ),
-                ],
+              CustomTextFormField(
+                label: 'Pincode (Required)*',
+                keyboardType: TextInputType.number,
+                controller: pinCodeController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please provide the necessary details';
+                  }
+                  return null;
+                },
               ),
               kheight20,
               Row(

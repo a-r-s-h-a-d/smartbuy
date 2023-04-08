@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartbuy/pages/widgets/custom_text_form_field.dart';
-import 'package:smartbuy/pages/widgets/custom_textform_field_2.dart';
 import 'package:smartbuy/services/controller/createprofile_controller.dart';
 import 'package:smartbuy/services/functions/profile/add_profile.dart';
 import 'package:smartbuy/services/functions/validations/validation.dart';
