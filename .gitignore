@@ -48,3 +48,6 @@ lib/controllers
 
 # razorpay api_key
 lib/utils/api_key.dart
+
+#key
+android/app/key

@@ -14,6 +14,80 @@
       },
       "oauth_client": [
         {
+          "client_id": "1067587247698-ffl45gvkuatli46hda8n0qvldlspld49.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smartbuy",
+            "certificate_hash": "1373b2a4034a9f5f2c77c3b49cc1d0493a1f3e24"
+          }
+        },
+        {
+          "client_id": "1067587247698-t9hrm36ugd7p5phph5bg4putfgij5l5s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcney7VTS92UEclKYddIK7jtwFsWk5OV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1067587247698-t9hrm36ugd7p5phph5bg4putfgij5l5s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067587247698:android:a67ae19c9ca27ea9ab898b",
+        "android_client_info": {
+          "package_name": "com.example.smartbuy_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1067587247698-t9hrm36ugd7p5phph5bg4putfgij5l5s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcney7VTS92UEclKYddIK7jtwFsWk5OV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1067587247698-t9hrm36ugd7p5phph5bg4putfgij5l5s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067587247698:android:c10f4e5faa4eef61ab898b",
+        "android_client_info": {
+          "package_name": "in.brototype.smartbuy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1067587247698-s2p7lb4krts13mtvvep96cu76qn4mkih.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.brototype.smartbuy",
+            "certificate_hash": "1373b2a4034a9f5f2c77c3b49cc1d0493a1f3e24"
+          }
+        },
+        {
           "client_id": "1067587247698-t9hrm36ugd7p5phph5bg4putfgij5l5s.apps.googleusercontent.com",
           "client_type": 3
         }
