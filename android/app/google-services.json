@@ -80,10 +80,63 @@
       },
       "oauth_client": [
         {
-          "client_id": "1067587247698-s2p7lb4krts13mtvvep96cu76qn4mkih.apps.googleusercontent.com",
+          "client_id": "1067587247698-3fa688kc0v6rpqm0a5kkgbmg0buooudp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "in.brototype.smartbuy",
+            "certificate_hash": "c6e4f0d7a0d867f2c34f7a15be0a81fb179a6316"
+          }
+        },
+        {
+          "client_id": "1067587247698-a8ifkl9nsa8ksajd8t1ue41bn59dldbq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.brototype.smartbuy",
+            "certificate_hash": "39bd19e42ff9660dd5b1c5cf10da23e12398962e"
+          }
+        },
+        {
+          "client_id": "1067587247698-gvnbgp6irld13l7jk2o8sscavdqt4j5j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.brototype.smartbuy",
+            "certificate_hash": "1373b2a4034a9f5f2c77c3b49cc1d0493a1f3e24"
+          }
+        },
+        {
+          "client_id": "1067587247698-t9hrm36ugd7p5phph5bg4putfgij5l5s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcney7VTS92UEclKYddIK7jtwFsWk5OV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1067587247698-t9hrm36ugd7p5phph5bg4putfgij5l5s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067587247698:android:f6fc759c98e8006bab898b",
+        "android_client_info": {
+          "package_name": "org.brototype.smartbuy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1067587247698-u68f2mh5misqkt1kb6es1t41e1q0emk4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.brototype.smartbuy",
             "certificate_hash": "1373b2a4034a9f5f2c77c3b49cc1d0493a1f3e24"
           }
         },
